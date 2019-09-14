@@ -6,31 +6,44 @@ This action would usually follow a build/test action which leaves deployable cod
 
 # Required SECRETs
 
-This action needs a `DEPLOY_KEY` secret variable. This should be the private key part of an ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment.
+This action needs a `DEPLOY_KEY` secret variable. This should be the private key part of an ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. This should be set in the Github secrets section and then referenced as an `env` variable.
 
 # Required ARGs
+This action requires 4 args in the `with` block.
 
-This action can receive three `ARG`s:
+1. `swtiches` - The first is for any initial/required rsync flags, eg: `-avzr --delete`
 
-1. The first is for any initial/required rsync flags, eg: `-avzr --delete`
+2. `excludes` - Any `--exclude` flags and directory pairs, eg: `--exclude .htaccess --exclude /uploads/`. Use "" if none required.
 
-2. The second is for any `--exclude` flags and directory pairs, eg: `--exclude .htaccess --exclude /uploads/`. Use "" if none required.
+3. `path` - The path to your desired directory to be deployed, if none; use `""`
 
-3. The third is for the deployment target, and should be in the format: `[USER]@[HOST]:[PATH]`
+4. `upload_path` - The deployment target, and should be in the format: `[USER]@[HOST]:[PATH]`
 
 # Example usage
 
 ```
-workflow "All pushes" {
-  on = "push"
-  resolves = ["Deploy to Staging"]
-}
+name: DEPLOY
+on:
+  push:
+    branches:
+    - master
 
-action "Deploy to Staging" {
-  uses = "contention/action-rsync-deploy@master"
-  secrets = ["DEPLOY_KEY"]
-  args = ["-avzr --delete", "--exclude .htaccess --exclude /uploads/", "user@server.com:/srv/myapp/public/htdocs/"]
-} 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: rsync deployments
+      uses: mickr/rsync-deployments@master
+      with:
+        switches: -avzr --delete
+        excludes: ""
+        path: src/
+        upload_path: user@example.com:/var/www/html/
+
+      env:
+        DEPLOY_KEY: ${{ secrets.private_key }}
+
 ```
 
 ## Disclaimer
