@@ -5,7 +5,9 @@ set -eu
 # Set deploy key
 SSH_PATH="$HOME/.ssh"
 # Create .ssh dir if it doesn't exist
-[[ -d "$SSH_PATH" ]] || mkdir "$SSH_PATH"
+if [ ! -d "$SSH_PATH" ]; then
+  mkdir "$SSH_PATH"
+fi
 # Place deploy_key into .ssh dir
 echo "$DEPLOY_KEY" > "$SSH_PATH/deploy_key"
 # Set r+w to user only
