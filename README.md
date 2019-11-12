@@ -1,12 +1,12 @@
 # rsync deployments
 
-This GitHub Action deploys *everything* in `GITHUB_WORKSPACE` to a folder on a server via rsync over ssh. 
+This GitHub Action deploys files in `GITHUB_WORKSPACE` to a folder on a server via rsync over ssh. 
 
-This action would usually follow a build/test action which leaves deployable code in `GITHUB_WORKSPACE`.
+Use this action in a build/test workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
 # Required SECRETs
 
-This action needs a `DEPLOY_KEY` secret variable. This should be the private key part of an ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. This should be set in the Github secrets section and then referenced as an `env` variable.
+This action needs a `DEPLOY_KEY` secret variable. This should be the private key part of a ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. This should be set in the Github secrets section and then referenced as an `env` variable.
 
 # Required ARGs
 
@@ -58,6 +58,6 @@ jobs:
 
 ## Disclaimer
 
-If you're using GitHub Actions, you'll probably already know that it's still in limited public beta, and GitHub advise against using Actions in production. 
+If you're using GitHub Actions, you probably already know that it's still in limited public beta, and GitHub advise against using Actions in production. 
 
 So, check your keys. Check your deployment paths. And use at your own risk.
