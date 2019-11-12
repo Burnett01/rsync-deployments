@@ -34,7 +34,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: mickr/rsync-deployments@master
+      uses: burnett01/rsync-deployments@master
       with:
         switches: -avzr --delete
         excludes: ""
