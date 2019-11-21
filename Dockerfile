@@ -15,9 +15,9 @@ LABEL "com.github.actions.description"="For deploying code to a webserver via rs
 LABEL "com.github.actions.icon"="truck"
 LABEL "com.github.actions.color"="yellow"
 
-LABEL "repository"="http://github.com/contention/rsync-deployments"
-LABEL "homepage"="https://github.com/contention/rsync-deployments"
-LABEL "maintainer"="Contention <hello@contention.agency>"
+LABEL "repository"="https://github.com/Burnett01/rsync-deployments"
+LABEL "homepage"="https://github.com/Burnett01/rsync-deployments"
+LABEL "maintainer"="Contention <hello@contention.agency> & Burnett01"
 
 
 # Copy entrypoint
