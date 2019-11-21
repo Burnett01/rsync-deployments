@@ -10,21 +10,15 @@ This action needs a `DEPLOY_KEY` secret variable. This should be the private key
 
 # Required ARGs
 
-This action requires 7 args in the `with` block.
+This action requires 4 args in the `with` block.
 
 1. `swtiches` - The first is for any initial/required rsync flags, eg: `-avzr --delete`
 
 2. `rsh` - Optional remote shell commands, eg for using a different SSH port: `"-p ${{ secrets.DEPLOY_PORT }}"`
 
-3. `includes` - Any `--include` flags and directory pairs, eg: `--include .htaccess --include /uploads/`. Use "" if none required.
+3. `path` - The source path, if none; use `""`
 
-4. `excludes` - Any `--exclude` flags and directory pairs, eg: `--exclude .htaccess --exclude /uploads/`. Use "" if none required.
-
-5. `filters` - Any `--filter` flags. Use "" if none required.
-
-6. `path` - The source path, if none; use `""`
-
-7. `upload_path` - The deployment target, and should be in the format: `[USER]@[HOST]:[PATH]`
+4. `upload_path` - The deployment target, and should be in the format: `[USER]@[HOST]:[PATH]`
 
 # Example usage
 
@@ -43,11 +37,8 @@ jobs:
     - name: rsync deployments
       uses: burnett01/rsync-deployments@master
       with:
-        switches: -avzr --delete
+        switches: -avzr --delete --exclude="" --include=""
         rsh: "-p ${{ secrets.DEPLOY_PORT }}"
-        includes: ""
-        excludes: ""
-        filters: ""
         path: src/
         upload_path: user@example.com:/var/www/html/
 
