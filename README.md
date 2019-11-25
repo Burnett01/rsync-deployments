@@ -8,7 +8,7 @@ Use this action in a build/test workflow which leaves deployable code in `GITHUB
 
 This action needs a `DEPLOY_KEY` secret variable. This should be the private key part of a ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. This should be set in the Github secrets section and then referenced as an `env` variable.
 
-# Required ARGs
+# ARGs
 
 This action requires 4 args in the `with` block.
 
