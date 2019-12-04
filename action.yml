@@ -19,6 +19,10 @@ inputs:
   remote_host:
     description: 'The remote host'
     required: true
+  remote_port:
+    description: 'The remote port'
+    required: false
+    default: 22
   remote_user:
     description: 'The remote user'
     required: true
