@@ -38,7 +38,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@master
+      uses: burnett01/rsync-deployments@1.0
       with:
         switches: -avzr --delete --exclude="" --include=""
         rsh: "-p ${{ secrets.DEPLOY_PORT }}"
