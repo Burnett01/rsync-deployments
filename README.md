@@ -11,7 +11,7 @@ Use this action in a build/test workflow which leaves deployable code in `GITHUB
 
 - `switches`* - The first is for any initial/required rsync flags, eg: `-avzr --delete`
 
-- `rsh` - Remote shell commands, eg for using a different SSH port: `"-p ${{ secrets.DEPLOY_PORT }}"`
+- `rsh` - Remote shell commands
 
 - `path` - The source path. Defaults to GITHUB_WORKSPACE
 
@@ -76,15 +76,15 @@ jobs:
       uses: burnett01/rsync-deployments@2.0
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
-        rsh: "-p ${{ secrets.DEPLOY_PORT }}"
         path: src/
         remote_path: /var/www/html/
         remote_host: example.com
+        remote_port: ${{ secrets.DEPLOY_PORT }}
         remote_user: debian
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
 
-For better security, I suggest you create additional secrets for remote_host and remote_user inputs.
+For better security, I suggest you create additional secrets for remote_host, remote_port and remote_user inputs.
 
 ```
 name: DEPLOY
@@ -105,6 +105,7 @@ jobs:
         path: src/
         remote_path: /var/www/html/
         remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
         remote_user: ${{ secrets.DEPLOY_USER }}
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
