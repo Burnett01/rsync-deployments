@@ -7,7 +7,9 @@ This GitHub Action deploys files in `GITHUB_WORKSPACE` to a folder on a server v
 
 Use this action in a build/test workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-# Inputs
+---
+
+##Inputs
 
 - `switches`* - The first is for any initial/required rsync flags, eg: `-avzr --delete`
 
@@ -27,11 +29,11 @@ Use this action in a build/test workflow which leaves deployable code in `GITHUB
 
 ``* = Required``
 
-# Required secret
+## Required secret
 
 This action needs a `DEPLOY_KEY` secret variable. This should be the private key part of a ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. This should be set in the Github secrets section and then referenced as the  `remote_key` input.
 
-# Example usage
+## Example usage
 
 Simple:
 
@@ -109,3 +111,13 @@ jobs:
         remote_user: ${{ secrets.DEPLOY_USER }}
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
+
+---
+
+## Version 1.0 (EOL)
+
+Looking for version 1.0?
+
+Check here: https://github.com/Burnett01/rsync-deployments/tree/1.0
+
+Please note that version 1.0 has reached end of life state.
