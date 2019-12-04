@@ -13,9 +13,9 @@ Use this action in a build/test workflow which leaves deployable code in `GITHUB
 
 - `rsh` - Remote shell commands, eg for using a different SSH port: `"-p ${{ secrets.DEPLOY_PORT }}"`
 
-- `path`* - The source path, if none; use `""`
+- `path` - The source path. Defaults to GITHUB_WORKSPACE
 
-- `remote_path`* - The deployment target, and should be in the format: `[USER]@[HOST]:[PATH]`
+- `remote_path`* - The deployment target path
 
 - `remote_host`* - The remote host
 
@@ -82,3 +82,27 @@ jobs:
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
 
+For better security, I suggest you create additional secrets for remote_host and remote_user inputs.
+
+```
+name: DEPLOY
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@1.0
+      with:
+        switches: -avzr --delete
+        path: src/
+        remote_path: /var/www/html/
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_key: ${{ secrets.DEPLOY_KEY }}
+```
