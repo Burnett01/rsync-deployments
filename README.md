@@ -9,7 +9,7 @@ Use this action in a build/test workflow which leaves deployable code in `GITHUB
 
 ---
 
-##Inputs
+## Inputs
 
 - `switches`* - The first is for any initial/required rsync flags, eg: `-avzr --delete`
 
