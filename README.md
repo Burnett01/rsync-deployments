@@ -79,7 +79,7 @@ jobs:
         path: src/
         remote_path: /var/www/html/
         remote_host: example.com
-        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_port: 5555
         remote_user: debian
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
