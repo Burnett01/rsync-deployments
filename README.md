@@ -9,7 +9,7 @@ Use this action in a build/test workflow which leaves deployable code in `GITHUB
 
 # Inputs
 
-- `swtiches`* - The first is for any initial/required rsync flags, eg: `-avzr --delete`
+- `switches`* - The first is for any initial/required rsync flags, eg: `-avzr --delete`
 
 - `rsh` - Remote shell commands, eg for using a different SSH port: `"-p ${{ secrets.DEPLOY_PORT }}"`
 
