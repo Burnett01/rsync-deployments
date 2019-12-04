@@ -1,0 +1,20 @@
+name: 'Rsync Deployments'
+description: 'GitHub Action for deploying code via rsync over ssh'
+author: 'Burnett01'
+inputs:
+  swtiches:
+    description: 'API method to use'
+    required: true
+  rsh:
+    description: 'Github repository token'
+    required: true
+  path:
+    description: 'Repository owner. Default: Current repository owner'
+  upload_path:
+    description: 'Repository name. Default: Current repository name'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'send'  
+  color: 'gray-dark'
