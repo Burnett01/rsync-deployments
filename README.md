@@ -7,23 +7,31 @@ This GitHub Action deploys files in `GITHUB_WORKSPACE` to a folder on a server v
 
 Use this action in a build/test workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-# Required SECRETs
+# Inputs
 
-This action needs a `DEPLOY_KEY` secret variable. This should be the private key part of a ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. This should be set in the Github secrets section and then referenced as an `env` variable.
+- `swtiches`* - The first is for any initial/required rsync flags, eg: `-avzr --delete`
 
-# ARGs
+- `rsh` - Remote shell commands, eg for using a different SSH port: `"-p ${{ secrets.DEPLOY_PORT }}"`
 
-This action requires 4 args in the `with` block.
+- `path`* - The source path, if none; use `""`
 
-1. `swtiches` - The first is for any initial/required rsync flags, eg: `-avzr --delete`
+- `remote_path`* - The deployment target, and should be in the format: `[USER]@[HOST]:[PATH]`
 
-2. `rsh` - Remote shell commands, eg for using a different SSH port: `"-p ${{ secrets.DEPLOY_PORT }}"`
+- `remote_host`* - The remote host
 
-3. `path` - The source path, if none; use `""`
+- `remote_user`* - The remote user
 
-4. `upload_path` - The deployment target, and should be in the format: `[USER]@[HOST]:[PATH]`
+- `remote_key`* - The remote ssh key
+
+* = Required
+
+# Required secret
+
+This action needs a `DEPLOY_KEY` secret variable. This should be the private key part of a ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. This should be set in the Github secrets section and then referenced as the  `remote_key` input.
 
 # Example usage
+
+Simple:
 
 ```
 name: DEPLOY
@@ -40,18 +48,37 @@ jobs:
     - name: rsync deployments
       uses: burnett01/rsync-deployments@1.0
       with:
-        switches: -avzr --delete --exclude="" --include=""
-        rsh: "-p ${{ secrets.DEPLOY_PORT }}"
+        switches: -avzr --delete
         path: src/
-        upload_path: user@example.com:/var/www/html/
-
-      env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-
+        remote_path: /var/www/html/
+        remote_host: example.com
+        remote_user: debian
+        remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
 
-## Disclaimer
+Advanced:
 
-If you're using GitHub Actions, you probably already know that it's still in limited public beta, and GitHub advise against using Actions in production. 
+```
+name: DEPLOY
+on:
+  push:
+    branches:
+    - master
 
-So, check your keys. Check your deployment paths. And use at your own risk.
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@1.0
+      with:
+        switches: -avzr --delete --exclude="" --include="" --filter=""
+        rsh: "-p ${{ secrets.DEPLOY_PORT }}"
+        path: src/
+        remote_path: /var/www/html/
+        remote_host: example.com
+        remote_user: debian
+        remote_key: ${{ secrets.DEPLOY_KEY }}
+```
+
