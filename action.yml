@@ -1,4 +1,4 @@
-name: 'Rsync Deployments'
+name: 'Rsync Deployments Action'
 description: 'GitHub Action for deploying code via rsync over ssh'
 author: 'Burnett01'
 inputs:
