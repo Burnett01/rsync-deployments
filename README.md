@@ -17,7 +17,7 @@ This action requires 4 args in the `with` block.
 
 1. `swtiches` - The first is for any initial/required rsync flags, eg: `-avzr --delete`
 
-2. `rsh` - Optional remote shell commands, eg for using a different SSH port: `"-p ${{ secrets.DEPLOY_PORT }}"`
+2. `rsh` - Remote shell commands, eg for using a different SSH port: `"-p ${{ secrets.DEPLOY_PORT }}"`
 
 3. `path` - The source path, if none; use `""`
 
