@@ -46,7 +46,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@1.0
+      uses: burnett01/rsync-deployments@2.0
       with:
         switches: -avzr --delete
         path: src/
@@ -71,7 +71,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@1.0
+      uses: burnett01/rsync-deployments@2.0
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         rsh: "-p ${{ secrets.DEPLOY_PORT }}"
@@ -97,7 +97,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@1.0
+      uses: burnett01/rsync-deployments@2.0
       with:
         switches: -avzr --delete
         path: src/
