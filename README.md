@@ -19,6 +19,8 @@ Use this action in a build/test workflow which leaves deployable code in `GITHUB
 
 - `remote_host`* - The remote host
 
+- `remote_port` - The remote port. Defaults to 22
+
 - `remote_user`* - The remote user
 
 - `remote_key`* - The remote ssh key
