@@ -23,7 +23,7 @@ Use this action in a build/test workflow which leaves deployable code in `GITHUB
 
 - `remote_key`* - The remote ssh key
 
-* = Required
+``* = Required``
 
 # Required secret
 
