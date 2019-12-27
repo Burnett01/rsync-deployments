@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 # Update
-RUN apk --update add rsync openssh-client
+RUN apk --update --no-cache add rsync bash openssh-client
 
 # Copy entrypoint
 ADD entrypoint.sh /entrypoint.sh
