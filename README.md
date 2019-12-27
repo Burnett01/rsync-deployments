@@ -3,9 +3,11 @@
 Forked from [Contention/rsync-deployments](https://github.com/Contention/rsync-deployments)
 
 
-This GitHub Action deploys files in `GITHUB_WORKSPACE` to a folder on a server via rsync over ssh. 
+This GitHub Action deploys files in `GITHUB_WORKSPACE` to a remote folder via rsync over ssh. 
 
-Use this action in a build/test workflow which leaves deployable code in `GITHUB_WORKSPACE`.
+Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
+
+The base-image is very small (Alpine+Cache) which results in faster deployments.
 
 ---
 
@@ -50,7 +52,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@2.0
+      uses: burnett01/rsync-deployments@3.0
       with:
         switches: -avzr --delete
         path: src/
@@ -63,19 +65,13 @@ jobs:
 Advanced:
 
 ```
-name: DEPLOY
-on:
-  push:
-    branches:
-    - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@2.0
+      uses: burnett01/rsync-deployments@3.0
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -89,19 +85,35 @@ jobs:
 For better security, I suggest you create additional secrets for remote_host, remote_port and remote_user inputs.
 
 ```
-name: DEPLOY
-on:
-  push:
-    branches:
-    - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@2.0
+      uses: burnett01/rsync-deployments@3.0
+      with:
+        switches: -avzr --delete
+        path: src/
+        remote_path: /var/www/html/
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_key: ${{ secrets.DEPLOY_KEY }}
+```
+
+For maximum speed limit the checkout action (``actions/checkout@v1``) to a depth of 1:
+
+```
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@3.0
       with:
         switches: -avzr --delete
         path: src/
@@ -113,6 +125,15 @@ jobs:
 ```
 
 ---
+
+## Version 2.0
+
+Looking for version 2.0?
+
+Check here: https://github.com/Burnett01/rsync-deployments/tree/2.0
+
+Version 2.0 uses a larger base-image (``ubuntu:latest``).<br>
+Consider upgrading to 3.0 for even faster deployments.
 
 ## Version 1.0 (EOL)
 
