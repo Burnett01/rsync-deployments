@@ -1,10 +1,7 @@
-FROM ubuntu:latest
+FROM alpine:latest
 
 # Update
-RUN apt-get update
-
-# Install packages
-RUN apt-get -yq install rsync openssh-client
+RUN apk --update add rsync
 
 # Copy entrypoint
 ADD entrypoint.sh /entrypoint.sh
