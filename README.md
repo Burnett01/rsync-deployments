@@ -3,9 +3,11 @@
 Forked from [Contention/rsync-deployments](https://github.com/Contention/rsync-deployments)
 
 
-This GitHub Action deploys files in `GITHUB_WORKSPACE` to a folder on a server via rsync over ssh. 
+This GitHub Action deploys files in `GITHUB_WORKSPACE` to a remote folder via rsync over ssh. 
 
-Use this action in a build/test workflow which leaves deployable code in `GITHUB_WORKSPACE`.
+Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
+
+The base-image is very small (Alpine+Cache) which results in faster deployments.
 
 ---
 
