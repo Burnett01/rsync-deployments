@@ -65,12 +65,6 @@ jobs:
 Advanced:
 
 ```
-name: DEPLOY
-on:
-  push:
-    branches:
-    - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -91,17 +85,33 @@ jobs:
 For better security, I suggest you create additional secrets for remote_host, remote_port and remote_user inputs.
 
 ```
-name: DEPLOY
-on:
-  push:
-    branches:
-    - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@3.0
+      with:
+        switches: -avzr --delete
+        path: src/
+        remote_path: /var/www/html/
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_key: ${{ secrets.DEPLOY_KEY }}
+```
+
+For maximum speed limit the checkout action (``actions/checkout@v1``) to a depth of 1:
+
+```
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
     - name: rsync deployments
       uses: burnett01/rsync-deployments@3.0
       with:
