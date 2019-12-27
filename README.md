@@ -52,7 +52,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@2.0
+      uses: burnett01/rsync-deployments@3.0
       with:
         switches: -avzr --delete
         path: src/
@@ -77,7 +77,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@2.0
+      uses: burnett01/rsync-deployments@3.0
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -103,7 +103,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@2.0
+      uses: burnett01/rsync-deployments@3.0
       with:
         switches: -avzr --delete
         path: src/
@@ -115,6 +115,15 @@ jobs:
 ```
 
 ---
+
+## Version 2.0
+
+Looking for version 2.0?
+
+Check here: https://github.com/Burnett01/rsync-deployments/tree/2.0
+
+Version 2.0 uses a larger base-image (``ubuntu:latest``).<br>
+Consider upgrading to 3.0 for even faster deployments.
 
 ## Version 1.0 (EOL)
 
