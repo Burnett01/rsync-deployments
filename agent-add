@@ -1,9 +1,4 @@
 #!/bin/sh
 
 source agent-start
-
-# I'm not particularly sure WHY this isn't working properly before, and why this makes it work
-# but it seems to.
-cat /dev/stdin | sed 's/-----BEGIN RSA PRIVATE KEY----- /-START-/' | sed 's/-----END RSA PRIVATE KEY----- /-END-/' |
-	tr ' ' '\n' | sed 's/-START-/-----BEGIN RSA PRIVATE KEY-----\n/' | sed 's/-END-/-----END RSA PRIVATE KEY-----\n/' |
-	ssh-add -
+cat - | tr -d '\r' | ssh-add -
