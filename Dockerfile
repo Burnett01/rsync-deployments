@@ -12,3 +12,4 @@ RUN mkdir ~/.ssh
 COPY agent-start agent-stop agent-add /bin/
 COPY hosts-clear hosts-add /bin/
 RUN chmod +x /bin/agent-* /bin/hosts-*
+RUN hosts-clear
