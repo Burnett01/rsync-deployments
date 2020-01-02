@@ -1,4 +1,4 @@
 #!/bin/sh
 
 source agent-start
-cat - | tr -d '\r' | ssh-add -
+cat - | tr -d '\r' | ssh-add - >/dev/null
