@@ -14,22 +14,22 @@ else
 	fi
 
 	# And check our files exist.
-	if [ -f "$STORE_PATH/ssh-agent-id" ]; then
+	if [ -f "$STORE_PATH/id" ]; then
 		# Grab our PID and socket.
 		SSH_AGENT_PID=$(cat "$STORE_PATH/id")
 		export SSH_AGENT_PID
-		rm "$STORE_PATH/ssh-agent-id"
+		rm "$STORE_PATH/id"
 
 		SSH_AUTH_SOCK=$(cat "$STORE_PATH/sock")
 		export SSH_AUTH_SOCK
-		rm "$STORE_PATH/ssh-auth-sock"
+		rm "$STORE_PATH/sock"
 
 
 		rmdir "$STORE_PATH"
 		eval $(ssh-agent -k) >/dev/null
 		exit $?
 	else
-		echo "SSH_AGENT_PID not set, $STORE_PATH/ssh-auth-sock doesn't exist!" >&2
+		echo "SSH_AGENT_PID not set, $STORE_PATH/id doesn't exist!" >&2
 		exit 1
 	fi
 fi
