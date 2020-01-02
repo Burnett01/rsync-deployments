@@ -5,11 +5,13 @@ MAINTAINER Dr Internet <internet@limelightgaming.net>
 RUN apk update && apk add --no-cache rsync openssh-client
 RUN rm -rf /var/cache/apk/*
 
-# Prepare for SSH keys.
+# Prepare SSH dir.
 RUN mkdir ~/.ssh
 
 # Copy in our executables.
 COPY agent-start agent-stop agent-add /bin/
 COPY hosts-clear hosts-add /bin/
 RUN chmod +x /bin/agent-* /bin/hosts-*
+
+# Prepare for known hosts.
 RUN hosts-clear
