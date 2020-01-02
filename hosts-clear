@@ -1,3 +1,4 @@
 #!/bin/sh
 
 truncate -s 0 ~/.ssh/known_hosts
+chmod 0664 ~/.ssh/known_hosts
