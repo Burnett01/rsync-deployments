@@ -10,4 +10,4 @@ RUN rm -rf /var/cache/apk/*
 RUN mkdir ~/.ssh
 
 # Copy in our executables.
-COPY add-key.sh /bin/add-key.sh
+COPY add-key.sh /bin/add-key
