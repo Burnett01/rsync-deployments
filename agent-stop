@@ -6,6 +6,7 @@ if [ ! -z "$SSH_AGENT_PID" ]; then
 	exit $?
 elif [ -f "/tmp/ssh-agent-id" ]; then
 	echo "File Exists"
+	cat /tmp/ssh-agent-id
 	SSH_AGENT_PID=$(cat /tmp/ssh-agent-id)
 	ssh-agent -k
 	exit $?
