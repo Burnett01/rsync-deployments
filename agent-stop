@@ -6,10 +6,8 @@ if [ ! -z "$SSH_AGENT_PID" ]; then
 	exit $?
 else
 	# The env isn't set, construct the file path.
-	STORE_PATH=/tmp
-	if [ ! -z "$1" ]; then
-		STORE_PATH="$STORE_PATH/$1"
-	fi
+	FOLDER=${1:-default}
+	STORE_PATH="/tmp/ssh-agent/$FOLDER"
 	if [ ! -d "$STORE_PATH" ]; then
 		echo "Store Path $STORE_PATH doesn't exist!" >&2
 		exit 1
@@ -18,14 +16,16 @@ else
 	# And check our files exist.
 	if [ -f "$STORE_PATH/ssh-agent-id" ]; then
 		# Grab our PID and socket.
-		SSH_AGENT_PID=$(cat "$STORE_PATH/ssh-agent-id")
+		SSH_AGENT_PID=$(cat "$STORE_PATH/id")
 		export SSH_AGENT_PID
 		rm "$STORE_PATH/ssh-agent-id"
 
-		SSH_AUTH_SOCK=$(cat "$STORE_PATH/ssh-auth-sock")
+		SSH_AUTH_SOCK=$(cat "$STORE_PATH/sock")
 		export SSH_AUTH_SOCK
 		rm "$STORE_PATH/ssh-auth-sock"
 
+
+		rmdir "$STORE_PATH"
 		eval $(ssh-agent -k) >/dev/null
 		exit $?
 	else

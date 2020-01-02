@@ -1,17 +1,12 @@
 #!/bin/sh
 
-STORE_PATH=/tmp
-if [ ! -z "$1" ]; then
-	# This allows us to work with things like gitlab.
-	# where the same thing might be running concurrently.
-	# If default, it only stores in /tmp/, but if a path is added, it's interpolated.
-	STORE_PATH="$STORE_PATH/$1"
-	mkdir -p "$STORE_PATH"
-fi
+FOLDER=${1:-default}
+STORE_PATH="/tmp/ssh-agent/$FOLDER"
+mkdir -p "$STORE_PATH"
 
 # Start the SSH agent if it isn't already.
 if [ -z "$SSH_AGENT_PID" ]; then
 	eval "$(ssh-agent)" > /dev/null
-	echo "$SSH_AGENT_PID" > "$STORE_PATH"/ssh-agent-id
-	echo "$SSH_AUTH_SOCK" > "$STORE_PATH"/ssh-auth-sock
+	echo "$SSH_AGENT_PID" > "$STORE_PATH"/id
+	echo "$SSH_AUTH_SOCK" > "$STORE_PATH"/sock
 fi
