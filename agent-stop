@@ -20,9 +20,11 @@ else
 		# Grab our PID and socket.
 		SSH_AGENT_PID=$(cat "$STORE_PATH/ssh-agent-id")
 		export SSH_AGENT_PID
+		rm "$STORE_PATH/ssh-agent-id"
 
 		SSH_AUTH_SOCK=$(cat "$STORE_PATH/ssh-auth-sock")
 		export SSH_AUTH_SOCK
+		rm "$STORE_PATH/ssh-auth-sock"
 
 		eval $(ssh-agent -k) >/dev/null
 		exit $?
