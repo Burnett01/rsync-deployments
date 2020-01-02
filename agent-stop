@@ -1,16 +1,33 @@
 #!/bin/sh
 
 if [ ! -z "$SSH_AGENT_PID" ]; then
-	echo "Var Set"
-	ssh-agent -k
-	exit $?
-elif [ -f "/tmp/ssh-agent-id" ]; then
-	echo "File Exists"
-	cat /tmp/ssh-agent-id
-	SSH_AGENT_PID=$(cat /tmp/ssh-agent-id)
-	ssh-agent -k
+	# Here, the environment is set already, just kill the script.
+	eval $(ssh-agent -k) >/dev/null
 	exit $?
 else
-	echo "SSH_AGENT_PID not set, /tmp/ssh-agent-id doesn't exist!" 1>&2
-	exit 1
+	# The env isn't set, construct the file path.
+	STORE_PATH=/tmp
+	if [ ! -z "$1" ]; then
+		STORE_PATH="$STORE_PATH/$1"
+	fi
+	if [ ! -d "$STORE_PATH" ]; then
+		echo "Store Path $STORE_PATH doesn't exist!" >&2
+		exit 1
+	fi
+
+	# And check our files exist.
+	if [ -f "$STORE_PATH/ssh-agent-id" ]; then
+		# Grab our PID and socket.
+		SSH_AGENT_PID=$(cat "$STORE_PATH/ssh-agent-id")
+		export SSH_AGENT_PID
+
+		SSH_AUTH_SOCK=$(cat "$STORE_PATH/ssh-auth-sock")
+		export SSH_AUTH_SOCK
+
+		eval $(ssh-agent -k) >/dev/null
+		exit $?
+	else
+		echo "SSH_AGENT_PID not set, $STORE_PATH/ssh-auth-sock doesn't exist!" >&2
+		exit 1
+	fi
 fi
