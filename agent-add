@@ -1,4 +1,5 @@
 #!/bin/sh
 
 agent-start
-echo /dev/stdin | tr -d '\r' | ssh-add -
+echo /dev/stdin | sed 's/-----BEGIN RSA PRIVATE KEY-----/-START-/' | sed 's/-----END RSA PRIVATE KEY-----/-END-/' | tr ' ' '\n' | sed 's/-START-/-----BEGIN RSA P
+RIVATE KEY-----/' | sed 's/-END-/-----END RSA PRIVATE KEY-----/' | ssh-add -
