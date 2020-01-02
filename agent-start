@@ -5,6 +5,4 @@ if [ -z "$SSH_AGENT_PID" ]; then
 	eval "$(ssh-agent)" > /dev/null
 	echo "$SSH_AGENT_PID" > /tmp/ssh-agent-id
 	echo "Started SSH Agent. PID: $SSH_AGENT_PID"
-else
-	echo "SSH Agent Running. PID: $SSH_AGENT_PID"
 fi

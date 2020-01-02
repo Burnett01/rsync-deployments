@@ -1,4 +1,4 @@
 #!/bin/sh
 
 agent-start
-echo /dev/stdin > ssh-add -
+echo /dev/stdin | ssh-add -
