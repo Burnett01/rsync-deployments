@@ -10,5 +10,6 @@ RUN rm -rf /var/cache/apk/*
 RUN mkdir ~/.ssh
 
 # Copy in our executables.
+COPY start-agent.sh /bin/start-agent
 COPY add-key.sh /bin/add-key
-RUN chmod +x /bin/add-key
+RUN chmod +x /bin/add-key /bin/start-agent
