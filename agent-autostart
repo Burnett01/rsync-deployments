@@ -1,0 +1,4 @@
+#!/bin/sh
+
+source agent-start
+echo "$SSH_PRIVATE_KEY" | agent-add
