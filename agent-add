@@ -1,4 +1,4 @@
 #!/bin/sh
 
-source agent-start
+source agent-start "${1:-default}"
 cat - | tr -d '\r' | ssh-add - >/dev/null
