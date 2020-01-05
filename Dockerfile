@@ -1,10 +1,7 @@
-FROM alpine:latest
-
-# Update
-RUN apk --update --no-cache add rsync bash openssh-client
+FROM drinternet/rsync:1.0.1
 
 # Copy entrypoint
-ADD entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
