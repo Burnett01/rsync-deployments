@@ -7,7 +7,7 @@ This GitHub Action deploys files in `GITHUB_WORKSPACE` to a remote folder via rs
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-The base-image is very small (Alpine+Cache) which results in faster deployments.
+The underlaying base-image of the docker-image is very small (Alpine (no cache)) which results in fast deployments.
 
 ---
 
@@ -52,7 +52,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@3.0
+      uses: burnett01/rsync-deployments@4.0
       with:
         switches: -avzr --delete
         path: src/
@@ -71,7 +71,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@3.0
+      uses: burnett01/rsync-deployments@4.0
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -91,7 +91,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@3.0
+      uses: burnett01/rsync-deployments@4.0
       with:
         switches: -avzr --delete
         path: src/
@@ -102,7 +102,7 @@ jobs:
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
 
-For maximum speed limit the checkout action (``actions/checkout@v1``) to a depth of 1:
+For maximum speed limit the checkout action (``actions/checkout@v1``) to a depth of 2:
 
 ```
 jobs:
@@ -111,9 +111,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@3.0
+      uses: burnett01/rsync-deployments@4.0
       with:
         switches: -avzr --delete
         path: src/
@@ -125,6 +125,16 @@ jobs:
 ```
 
 ---
+
+## Version 3.0
+
+Looking for version 3.0?
+
+Check here: https://github.com/Burnett01/rsync-deployments/tree/3.0
+
+Version 3.0 uses the ``alpine:latest`` base-image directly.<br>
+Consider upgrading to 4.0 that uses a docker-image ``drinternet/rsync:1.0.1`` that is<br>
+based on ``alpine:latest``and heavily optimized for rsync.
 
 ## Version 2.0
 
