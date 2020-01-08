@@ -1,8 +1,5 @@
 # rsync deployments
 
-Forked from [Contention/rsync-deployments](https://github.com/Contention/rsync-deployments)
-
-
 This GitHub Action deploys files in `GITHUB_WORKSPACE` to a remote folder via rsync over ssh. 
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
@@ -152,3 +149,12 @@ Looking for version 1.0?
 Check here: https://github.com/Burnett01/rsync-deployments/tree/1.0
 
 Please note that version 1.0 has reached end of life state.
+
+---
+
+## Acknowledgements
+
++ This project is a fork of [Contention/rsync-deployments](https://github.com/Contention/rsync-deployments)
++ Base image [JoshPiper/rsync-docker](https://github.com/JoshPiper/rsync-docker)
+
+
