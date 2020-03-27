@@ -47,7 +47,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: rsync deployments
       uses: burnett01/rsync-deployments@4.0
       with:
@@ -66,7 +66,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: rsync deployments
       uses: burnett01/rsync-deployments@4.0
       with:
@@ -86,29 +86,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: rsync deployments
-      uses: burnett01/rsync-deployments@4.0
-      with:
-        switches: -avzr --delete
-        path: src/
-        remote_path: /var/www/html/
-        remote_host: ${{ secrets.DEPLOY_HOST }}
-        remote_port: ${{ secrets.DEPLOY_PORT }}
-        remote_user: ${{ secrets.DEPLOY_USER }}
-        remote_key: ${{ secrets.DEPLOY_KEY }}
-```
-
-For maximum speed limit the checkout action (``actions/checkout@v1``) to a depth of 2:
-
-```
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 2
+    - uses: actions/checkout@v2
     - name: rsync deployments
       uses: burnett01/rsync-deployments@4.0
       with:
