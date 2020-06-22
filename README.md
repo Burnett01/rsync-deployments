@@ -49,7 +49,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@4.0
+      uses: burnett01/rsync-deployments@4.1
       with:
         switches: -avzr --delete
         path: src/
@@ -68,7 +68,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@4.0
+      uses: burnett01/rsync-deployments@4.1
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -88,7 +88,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@4.0
+      uses: burnett01/rsync-deployments@4.1
       with:
         switches: -avzr --delete
         path: src/
