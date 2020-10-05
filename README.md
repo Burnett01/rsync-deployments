@@ -135,4 +135,21 @@ Please note that version 1.0 has reached end of life state.
 + This project is a fork of [Contention/rsync-deployments](https://github.com/Contention/rsync-deployments)
 + Base image [JoshPiper/rsync-docker](https://github.com/JoshPiper/rsync-docker)
 
+---
+
+## Media
+
+This action was featured in multiple blogs across the globe:
+
+- https://leobrack.co.uk/blog/2020-02-15-automatically-push-changes-to-your-live-site-with-github-actions
+
+- https://blog.maniak.co/ci-cd-for-wordpress/
+
+- https://elijahverdoorn.com/2020/04/14/automating-deployment-with-github-actions/
+
+- https://www.vektor-inc.co.jp/post/github-actions-deploy/
+
+- https://ews.ink/tech/blog-deploy-2/
+
+- https://webpick.info/automatiser-avec-github-actions/
 
