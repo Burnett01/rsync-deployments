@@ -153,3 +153,16 @@ This action was featured in multiple blogs across the globe:
 
 - https://webpick.info/automatiser-avec-github-actions/
 
+- https://matthias-andrasch.eu/blog/2021/tutorial-webseite-mittels-github-actions-deployment-zu-uberspace-uebertragen-rsync/
+
+- https://mikael.koutero.me/posts/hugo-github-actions-deploy-rsync/
+
+- https://cdmana.com/2021/02/20210208122400688I.html
+
+- https://jishuin.proginn.com/p/763bfbd38928
+
+- https://cloud.tencent.com/developer/article/1786522
+
+- http://www.ningco.cn/github_action_deploy_blog/
+
+- https://qdmana.com/2021/01/20210127094413405u.html
