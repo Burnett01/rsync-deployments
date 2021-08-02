@@ -26,11 +26,15 @@ The underlaying base-image of the docker-image is very small (Alpine (no cache))
 
 - `remote_key`* - The remote ssh key
 
+- `remote_key_pass` - The remote ssh key passphrase (if any)
+
 ``* = Required``
 
-## Required secret
+## Required secret(s)
 
-This action needs a `DEPLOY_KEY` secret variable. This should be the private key part of a ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. This should be set in the Github secrets section and then referenced as the  `remote_key` input.
+This action needs a secret variable for the ssh private key of your ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. The secret variable should be set in the Github secrets section of your org/repo and then referenced as the  `remote_key` input.
+
+For simplicity, we are using `DEPLOY_*` as the secret variables throughout the examples.
 
 ## Example usage
 
@@ -49,7 +53,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@4.1
+      uses: burnett01/rsync-deployments@5.0
       with:
         switches: -avzr --delete
         path: src/
@@ -68,7 +72,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@4.1
+      uses: burnett01/rsync-deployments@5.0
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -79,7 +83,7 @@ jobs:
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
 
-For better security, I suggest you create additional secrets for remote_host, remote_port and remote_user inputs.
+For better security, I suggest you create additional secrets for remote_host, remote_port, remote_user and remote_path inputs.
 
 ```
 jobs:
@@ -88,16 +92,49 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@4.1
+      uses: burnett01/rsync-deployments@5.0
       with:
         switches: -avzr --delete
         path: src/
-        remote_path: /var/www/html/
+        remote_path: ${{ secrets.DEPLOY_PATH }}
         remote_host: ${{ secrets.DEPLOY_HOST }}
         remote_port: ${{ secrets.DEPLOY_PORT }}
         remote_user: ${{ secrets.DEPLOY_USER }}
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
+
+If your private key is passphrase protected you should use:
+
+```
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@5.0
+      with:
+        switches: -avzr --delete
+        path: src/
+        remote_path: ${{ secrets.DEPLOY_PATH }}
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_key: ${{ secrets.DEPLOY_KEY }}
+        remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
+```
+---
+
+## Version 4.0 & 4.1
+
+Looking for version 4.0 and 4.1?
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/4.0
+- https://github.com/Burnett01/rsync-deployments/tree/4.1
+
+Version 4.0 & 4.1 use the ``drinternet/rsync:1.0.1`` base-image.
 
 ---
 
