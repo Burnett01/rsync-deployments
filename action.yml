@@ -32,6 +32,7 @@ inputs:
   remote_key_pass:
     description: 'The remote key passphrase'
     required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
