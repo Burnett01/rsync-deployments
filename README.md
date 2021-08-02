@@ -41,7 +41,7 @@ It takes one optional argument, for the name of the agent to be stopped. Default
 #### agent-add
 This command adds a key to the currently running SSH agent. The key is taken from stdin, and the agent used is that in SSH_AGENT_PID.
 
-#### agent-autoadd
+#### agent-autostart
 This command starts the SSH agent and loads the private key from the "SSH_PRIVATE_KEY" environment var. The command takes one optional argument, for the name of the agent to be started. Defaults to "default".
 As with agent-start, this command needs to be sourced.
 
