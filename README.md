@@ -32,7 +32,9 @@ The underlaying base-image of the docker-image is very small (Alpine (no cache))
 
 ## Required secret(s)
 
-This action needs a secret variable for the ssh private key of your ssh key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. The secret variable should be set in the Github secrets section of your org/repo and then referenced as the  `remote_key` input.
+This action needs secret variables for the ssh private key of your key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. The secret variable should be set in the Github secrets section of your org/repo and then referenced as the  `remote_key` input.
+
+> Always use secrets when dealing with sensitive inputs!
 
 For simplicity, we are using `DEPLOY_*` as the secret variables throughout the examples.
 
@@ -83,7 +85,7 @@ jobs:
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
 
-For better security, I suggest you create additional secrets for remote_host, remote_port, remote_user and remote_path inputs.
+For better **security**, I suggest you create additional secrets for remote_host, remote_port, remote_user and remote_path inputs.
 
 ```
 jobs:
