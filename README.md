@@ -58,11 +58,11 @@ This command truncates the known_hosts file and sets its permissions.
 This command adds an entry to the known hosts file, and ensures its permissions are correct. It takes one argument, which is the new key to add.
 
 ## Tags
-Most numeric tags are simple version numbers for the various scripts. However, there are some special tags.
-staging: The latest build from the master branch.
-*-rc: release candidate builds, nearly ready but might contain small changes.
-*-beta: beta builds, still need testing but shouldn't change too much.
-*-alpha: alpha builds, which are likely to change.
+Both the repository and Docker Hub images follow the [semantic versioning](https://semver.org/) standard.
+Docker Hub image versions are prefixed with v, and contain the full version, version sub patch number and version sub minor and patch.
+
+For example, the repository tag 1.2.3, creates the Hub tags v1.2.3, v1.2 and v1, to allow for binding to a specific version, specific minor version or specific major version.
+
 
 ## Example gitlab-ci.yml
 ```yml
