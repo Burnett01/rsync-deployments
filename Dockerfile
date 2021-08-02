@@ -9,8 +9,7 @@ RUN rm -rf /var/cache/apk/*
 RUN mkdir ~/.ssh
 
 # Copy in our executables.
-COPY agent-start agent-stop agent-add agent-autostart /bin/
-COPY hosts-clear hosts-add /bin/
+COPY agent-* hosts-* /bin/
 RUN chmod +x /bin/agent-* /bin/hosts-*
 
 # Prepare for known hosts.
