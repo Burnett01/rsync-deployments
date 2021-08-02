@@ -1,4 +1,4 @@
-FROM drinternet/rsync:1.1.0
+FROM drinternet/rsync:v1.2.0
 
 # Copy entrypoint
 COPY entrypoint.sh /entrypoint.sh
