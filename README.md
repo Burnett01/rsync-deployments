@@ -150,7 +150,7 @@ Version 3.0 uses the ``alpine:latest`` base-image directly.<br>
 Consider upgrading to 4.0 that uses a docker-image ``drinternet/rsync:1.0.1`` that is<br>
 based on ``alpine:latest``and heavily optimized for rsync.
 
-## Version 2.0
+## Version 2.0 (EOL)
 
 Looking for version 2.0?
 
