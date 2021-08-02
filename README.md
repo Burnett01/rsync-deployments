@@ -41,9 +41,14 @@ It takes one optional argument, for the name of the agent to be stopped. Default
 #### agent-add
 This command adds a key to the currently running SSH agent. The key is taken from stdin, and the agent used is that in SSH_AGENT_PID.
 
-#### agent-autoadd
+#### agent-autostart
 This command starts the SSH agent and loads the private key from the "SSH_PRIVATE_KEY" environment var. The command takes one optional argument, for the name of the agent to be started. Defaults to "default".
 As with agent-start, this command needs to be sourced.
+
+#### agent-askpass
+This command is called by ssh-add when the [SSH_ASKPASS](https://man.openbsd.org/ssh-add.1#ENVIRONMENT) variable is set active. The command returns the SSH_PASS to [ssh-askpass(1)](https://man.openbsd.org/ssh-askpass.1).
+
+This command is ignored by ssh-add if the key does not require a passphrase.
 
 ### known_hosts management
 #### hosts-clear
@@ -77,4 +82,12 @@ deploy:
   stage: deploy
   script:
     - rsync -zrSlhaO --chmod=D2775,F664 --delete-after . $FTP_USER@$FTP_HOST:/var/www/deployment/
+```
+
+## Using with passphrase protected key
+
+You can supply a passphrase with ``SSH_PASS`` to ``agent-add``, ``agent-start`` or ``agent-autostart``.
+
+```
+SSH_PASS="THE_PASSPHRASE" agent-add
 ```
