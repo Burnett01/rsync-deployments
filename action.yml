@@ -29,6 +29,9 @@ inputs:
   remote_key:
     description: 'The remote key'
     required: true
+  remote_key_pass:
+    description: 'The remote key passphrase'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
