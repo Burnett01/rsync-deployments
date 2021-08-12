@@ -4,7 +4,7 @@ This GitHub Action deploys files in `GITHUB_WORKSPACE` to a remote folder via rs
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-The underlaying base-image of the docker-image is very small (Alpine (no cache)) which results in fast deployments.
+The base-image (drinternet/rsync) of this action is very small and is based on Alpine 3.14.1 (no cache) which results in fast deployments.
 
 ---
 
@@ -55,7 +55,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.0
+      uses: burnett01/rsync-deployments@5.1
       with:
         switches: -avzr --delete
         path: src/
@@ -74,7 +74,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.0
+      uses: burnett01/rsync-deployments@5.1
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -94,7 +94,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.0
+      uses: burnett01/rsync-deployments@5.1
       with:
         switches: -avzr --delete
         path: src/
@@ -114,7 +114,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.0
+      uses: burnett01/rsync-deployments@5.1
       with:
         switches: -avzr --delete
         path: src/
