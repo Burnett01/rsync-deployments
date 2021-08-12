@@ -4,7 +4,7 @@ This GitHub Action deploys files in `GITHUB_WORKSPACE` to a remote folder via rs
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-The base-image (drinternet/rsync) of this action is very small and is based on Alpine (no cache) which results in fast deployments.
+The base-image (drinternet/rsync) of this action is very small and is based on Alpine 3.14.1 (no cache) which results in fast deployments.
 
 ---
 
