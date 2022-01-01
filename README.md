@@ -140,7 +140,7 @@ Version 4.0 & 4.1 use the ``drinternet/rsync:1.0.1`` base-image.
 
 ---
 
-## Version 3.0
+## Version 3.0 (EOL)
 
 Looking for version 3.0?
 
