@@ -1,6 +1,6 @@
 # rsync deployments
 
-This GitHub Action deploys files in `GITHUB_WORKSPACE` to a remote folder via rsync over ssh. 
+This GitHub Action (amd64) deploys files in `GITHUB_WORKSPACE` to a remote folder via rsync over ssh. 
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
@@ -14,7 +14,7 @@ The base-image (drinternet/rsync) of this action is very small and is based on A
 
 - `rsh` - Remote shell commands
 
-- `path` - The source path. Defaults to GITHUB_WORKSPACE
+- `path` - The source path. Defaults to GITHUB_WORKSPACE and is relative to it
 
 - `remote_path`* - The deployment target path
 
