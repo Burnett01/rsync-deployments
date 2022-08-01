@@ -4,7 +4,7 @@ This GitHub Action (amd64) deploys files in `GITHUB_WORKSPACE` to a remote folde
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-The base-image (drinternet/rsync) of this action is very small and is based on Alpine 3.15.0 (no cache) which results in fast deployments.
+The base-image (drinternet/rsync) of this action is very small and is based on Alpine 3.16.1 (no cache) which results in fast deployments.
 
 ---
 
@@ -55,7 +55,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2
+      uses: burnett01/rsync-deployments@5.2.1
       with:
         switches: -avzr --delete
         path: src/
@@ -74,7 +74,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2
+      uses: burnett01/rsync-deployments@5.2.1
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -94,7 +94,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2
+      uses: burnett01/rsync-deployments@5.2.1
       with:
         switches: -avzr --delete
         path: src/
@@ -114,7 +114,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2
+      uses: burnett01/rsync-deployments@5.2.1
       with:
         switches: -avzr --delete
         path: src/
@@ -127,9 +127,17 @@ jobs:
 ```
 ---
 
-## Version 4.0 & 4.1
+## Version 5.0, 5.1 & 5.2
 
-Looking for version 4.0 and 4.1?
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/5.0  (alpine 3.11.x)
+- https://github.com/Burnett01/rsync-deployments/tree/5.1  (alpine 3.14.1)
+- https://github.com/Burnett01/rsync-deployments/tree/5.2  (alpine 3.15.0)
+
+---
+
+## Version 4.0 & 4.1
 
 Check here: 
 
@@ -142,8 +150,6 @@ Version 4.0 & 4.1 use the ``drinternet/rsync:1.0.1`` base-image.
 
 ## Version 3.0 (EOL)
 
-Looking for version 3.0?
-
 Check here: https://github.com/Burnett01/rsync-deployments/tree/3.0
 
 Version 3.0 uses the ``alpine:latest`` base-image directly.<br>
@@ -152,16 +158,12 @@ based on ``alpine:latest``and heavily optimized for rsync.
 
 ## Version 2.0 (EOL)
 
-Looking for version 2.0?
-
 Check here: https://github.com/Burnett01/rsync-deployments/tree/2.0
 
 Version 2.0 uses a larger base-image (``ubuntu:latest``).<br>
 Consider upgrading to 3.0 for even faster deployments.
 
 ## Version 1.0 (EOL)
-
-Looking for version 1.0?
 
 Check here: https://github.com/Burnett01/rsync-deployments/tree/1.0
 
