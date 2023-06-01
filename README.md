@@ -4,7 +4,7 @@ This GitHub Action (amd64) deploys files in `GITHUB_WORKSPACE` to a remote folde
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-The base-image (drinternet/rsync) of this action is very small and is based on Alpine 3.16.1 (no cache) which results in fast deployments.
+The base-image (drinternet/rsync) of this action is very small and is based on Alpine 3.17.2 (no cache) which results in fast deployments.
 
 ---
 
@@ -55,7 +55,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2.1
+      uses: burnett01/rsync-deployments@5.2.2
       with:
         switches: -avzr --delete
         path: src/
@@ -74,7 +74,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2.1
+      uses: burnett01/rsync-deployments@5.2.2
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -94,7 +94,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2.1
+      uses: burnett01/rsync-deployments@5.2.2
       with:
         switches: -avzr --delete
         path: src/
@@ -114,7 +114,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2.1
+      uses: burnett01/rsync-deployments@5.2.2
       with:
         switches: -avzr --delete
         path: src/
@@ -134,7 +134,9 @@ Check here:
 - https://github.com/Burnett01/rsync-deployments/tree/5.0  (alpine 3.11.x)
 - https://github.com/Burnett01/rsync-deployments/tree/5.1  (alpine 3.14.1)
 - https://github.com/Burnett01/rsync-deployments/tree/5.2  (alpine 3.15.0)
-
+- https://github.com/Burnett01/rsync-deployments/tree/5.2.1  (alpine 3.16.0)
+- https://github.com/Burnett01/rsync-deployments/tree/5.2.2  (alpine 3.17.2)
+- 
 ---
 
 ## Version 4.0 & 4.1
