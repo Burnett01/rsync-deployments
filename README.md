@@ -134,7 +134,7 @@ Check here:
 - https://github.com/Burnett01/rsync-deployments/tree/5.0  (alpine 3.11.x)
 - https://github.com/Burnett01/rsync-deployments/tree/5.1  (alpine 3.14.1)
 - https://github.com/Burnett01/rsync-deployments/tree/5.2  (alpine 3.15.0)
-- https://github.com/Burnett01/rsync-deployments/tree/5.2.1  (alpine 3.16.0)
+- https://github.com/Burnett01/rsync-deployments/tree/5.2.1  (alpine 3.16.1)
 - https://github.com/Burnett01/rsync-deployments/tree/5.2.2  (alpine 3.17.2)
 - 
 ---
