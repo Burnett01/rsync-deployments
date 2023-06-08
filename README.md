@@ -4,7 +4,7 @@ This GitHub Action (amd64) deploys files in `GITHUB_WORKSPACE` to a remote folde
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-The base-image (drinternet/rsync) of this action is very small and is based on Alpine 3.17.2 (no cache) which results in fast deployments.
+The base-image [drinternet/rsync](https://github.com/JoshPiper/rsync-docker/) of this action is very small and is based on Alpine 3.17.2 (no cache) which results in fast deployments.
 
 ---
 
@@ -53,9 +53,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2.2
+      uses: burnett01/rsync-deployments@6.0.0
       with:
         switches: -avzr --delete
         path: src/
@@ -72,9 +72,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2.2
+      uses: burnett01/rsync-deployments@6.0.0
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -92,9 +92,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2.2
+      uses: burnett01/rsync-deployments@6.0.0
       with:
         switches: -avzr --delete
         path: src/
@@ -112,9 +112,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2.2
+      uses: burnett01/rsync-deployments@6.0.0
       with:
         switches: -avzr --delete
         path: src/
@@ -183,6 +183,8 @@ Please note that version 1.0 has reached end of life state.
 ## Media
 
 This action was featured in multiple blogs across the globe:
+
+> Disclaimer: The author & co-authors are not responsible for the content of the site-links below.
 
 - https://leobrack.co.uk/blog/2020-02-15-automatically-push-changes-to-your-live-site-with-github-actions
 
