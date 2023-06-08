@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -z "$(awk '{$1=$1};1' <<< "$INPUT_REMOTE_PATH")" ]; then
+if [ -z "$(awk '{$1=$1} END{print}' <<< "$INPUT_REMOTE_PATH")" ]; then
     echo "The remote_path can not be empty. see: github.com/Burnett01/rsync-deployments/issues/44"
     exit 1
 fi
