@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ -z "$(echo "$INPUT_REMOTE_PATH" | awk '{$1=$1};1')" ]; then
+    echo "The remote_path can not be empty. see: github.com/Burnett01/rsync-deployments/issues/44"
+    exit 1
+fi
+
 # Start the SSH agent and load key.
 source agent-start "$GITHUB_ACTION"
 echo "$INPUT_REMOTE_KEY" | SSH_PASS="$INPUT_REMOTE_KEY_PASS" agent-add
