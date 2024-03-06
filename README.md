@@ -158,7 +158,15 @@ See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](ht
 
 ---
 
-## Version 5.0, 5.1 & 5.2
+## Version 6.0 (MAINTENANCE)
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/6.0  (alpine 3.17.2)
+
+---
+
+## Version 5.0, 5.1 & 5.2 & 5.x (DEPRECATED)
 
 Check here: 
 
@@ -167,10 +175,10 @@ Check here:
 - https://github.com/Burnett01/rsync-deployments/tree/5.2  (alpine 3.15.0)
 - https://github.com/Burnett01/rsync-deployments/tree/5.2.1  (alpine 3.16.1)
 - https://github.com/Burnett01/rsync-deployments/tree/5.2.2  (alpine 3.17.2)
-- 
+
 ---
 
-## Version 4.0 & 4.1
+## Version 4.0 & 4.1 (EOL)
 
 Check here: 
 
