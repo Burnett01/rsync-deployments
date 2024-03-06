@@ -4,7 +4,7 @@ This GitHub Action (amd64) deploys files in `GITHUB_WORKSPACE` to a remote folde
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-The base-image [drinternet/rsync](https://github.com/JoshPiper/rsync-docker/) of this action is very small and is based on Alpine 3.17.2 (no cache) which results in fast deployments.
+The base-image [drinternet/rsync](https://github.com/JoshPiper/rsync-docker/) of this action is very small and is based on Alpine 3.19.1 (no cache) which results in fast deployments.
 
 ---
 
