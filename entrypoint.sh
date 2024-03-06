@@ -13,8 +13,11 @@ echo "$INPUT_REMOTE_KEY" | SSH_PASS="$INPUT_REMOTE_KEY_PASS" agent-add
 set -eu
 
 # Variables.
+LEGACY_RSA_HOSTKEYS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
+LEGACY_RSA_HOSTKEYS=$([ "$INPUT_LEGACY_ALLOW_RSA_HOSTKEYS" = "true" ] && echo "$LEGACY_RSA_HOSTKEYS" || echo "")
+
 SWITCHES="$INPUT_SWITCHES"
-RSH="ssh -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -p $INPUT_REMOTE_PORT $INPUT_RSH"
+RSH="ssh -o StrictHostKeyChecking=no $LEGACY_RSA_HOSTKEYS -p $INPUT_REMOTE_PORT $INPUT_RSH"
 LOCAL_PATH="$GITHUB_WORKSPACE/$INPUT_PATH"
 DSN="$INPUT_REMOTE_USER@$INPUT_REMOTE_HOST"
 
