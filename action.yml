@@ -9,6 +9,10 @@ inputs:
     description: 'The remote shell argument'
     required: false
     default: ''
+  legacy_allow_rsa_hostkeys:
+    description: 'Enables support for legacy RSA host keys on OpenSSH 8.8+'
+    required: false
+    default: 'false'
   path:
     description: 'The local path'
     required: false
