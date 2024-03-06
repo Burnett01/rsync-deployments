@@ -14,6 +14,8 @@ The base-image [drinternet/rsync](https://github.com/JoshPiper/rsync-docker/) of
 
 - `rsh` - Remote shell commands
 
+- `legacy_allow_rsa_hostkeys` - Enables support for legacy RSA host keys on OpenSSH 8.8+. ("true" / "false")
+
 - `path` - The source path. Defaults to GITHUB_WORKSPACE and is relative to it
 
 - `remote_path`* - The deployment target path
@@ -125,6 +127,35 @@ jobs:
         remote_key: ${{ secrets.DEPLOY_KEY }}
         remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
 ```
+
+---
+
+#### Legacy RSA Hostkeys support for OpenSSH Servers >= 8.8+
+
+If your remote OpenSSH Server still uses RSA hostkeys, then you have to
+manually enable legacy support for this by using ``legacy_allow_rsa_hostkeys: "true"``.
+
+```
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@6.0.0
+      with:
+        switches: -avzr --delete
+        legacy_allow_rsa_hostkeys: "true"
+        path: src/
+        remote_path: ${{ secrets.DEPLOY_PATH }}
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_key: ${{ secrets.DEPLOY_KEY }}
+```
+
+See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](https://github.com/Burnett01/rsync-deployments/issues/24) for more information.
+
 ---
 
 ## Version 5.0, 5.1 & 5.2
