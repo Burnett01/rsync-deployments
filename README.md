@@ -4,7 +4,7 @@ This GitHub Action (amd64) deploys files in `GITHUB_WORKSPACE` to a remote folde
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-The base-image [drinternet/rsync](https://github.com/JoshPiper/rsync-docker/) of this action is very small and is based on Alpine 3.17.2 (no cache) which results in fast deployments.
+The base-image [drinternet/rsync](https://github.com/JoshPiper/rsync-docker/) of this action is very small and is based on Alpine 3.19.1 (no cache) which results in fast deployments.
 
 ---
 
@@ -13,6 +13,8 @@ The base-image [drinternet/rsync](https://github.com/JoshPiper/rsync-docker/) of
 - `switches`* - The first is for any initial/required rsync flags, eg: `-avzr --delete`
 
 - `rsh` - Remote shell commands
+
+- `legacy_allow_rsa_hostkeys` - Enables support for legacy RSA host keys on OpenSSH 8.8+. ("true" / "false")
 
 - `path` - The source path. Defaults to GITHUB_WORKSPACE and is relative to it
 
@@ -55,7 +57,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@6.0.0
+      uses: burnett01/rsync-deployments@7.0.0
       with:
         switches: -avzr --delete
         path: src/
@@ -74,7 +76,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@6.0.0
+      uses: burnett01/rsync-deployments@7.0.0
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -94,7 +96,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@6.0.0
+      uses: burnett01/rsync-deployments@7.0.0
       with:
         switches: -avzr --delete
         path: src/
@@ -114,7 +116,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@6.0.0
+      uses: burnett01/rsync-deployments@7.0.0
       with:
         switches: -avzr --delete
         path: src/
@@ -125,9 +127,46 @@ jobs:
         remote_key: ${{ secrets.DEPLOY_KEY }}
         remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
 ```
+
 ---
 
-## Version 5.0, 5.1 & 5.2
+#### Legacy RSA Hostkeys support for OpenSSH Servers >= 8.8+
+
+If your remote OpenSSH Server still uses RSA hostkeys, then you have to
+manually enable legacy support for this by using ``legacy_allow_rsa_hostkeys: "true"``.
+
+```
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@7.0.0
+      with:
+        switches: -avzr --delete
+        legacy_allow_rsa_hostkeys: "true"
+        path: src/
+        remote_path: ${{ secrets.DEPLOY_PATH }}
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_key: ${{ secrets.DEPLOY_KEY }}
+```
+
+See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](https://github.com/Burnett01/rsync-deployments/issues/24) for more information.
+
+---
+
+## Version 6.0 (MAINTENANCE)
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/6.0  (alpine 3.17.2)
+
+---
+
+## Version 5.0, 5.1 & 5.2 & 5.x (DEPRECATED)
 
 Check here: 
 
@@ -136,10 +175,10 @@ Check here:
 - https://github.com/Burnett01/rsync-deployments/tree/5.2  (alpine 3.15.0)
 - https://github.com/Burnett01/rsync-deployments/tree/5.2.1  (alpine 3.16.1)
 - https://github.com/Burnett01/rsync-deployments/tree/5.2.2  (alpine 3.17.2)
-- 
+
 ---
 
-## Version 4.0 & 4.1
+## Version 4.0 & 4.1 (EOL)
 
 Check here: 
 
