@@ -57,7 +57,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@6.0.0
+      uses: burnett01/rsync-deployments@7.0.0
       with:
         switches: -avzr --delete
         path: src/
@@ -76,7 +76,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@6.0.0
+      uses: burnett01/rsync-deployments@7.0.0
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -96,7 +96,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@6.0.0
+      uses: burnett01/rsync-deployments@7.0.0
       with:
         switches: -avzr --delete
         path: src/
@@ -116,7 +116,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@6.0.0
+      uses: burnett01/rsync-deployments@7.0.0
       with:
         switches: -avzr --delete
         path: src/
@@ -142,7 +142,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@6.0.0
+      uses: burnett01/rsync-deployments@7.0.0
       with:
         switches: -avzr --delete
         legacy_allow_rsa_hostkeys: "true"
