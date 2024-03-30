@@ -40,6 +40,8 @@ This action needs secret variables for the ssh private key of your key pair. The
 
 For simplicity, we are using `DEPLOY_*` as the secret variables throughout the examples.
 
+## Current Version: 7.0.1
+
 ## Example usage
 
 Simple:
@@ -57,7 +59,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.0
+      uses: burnett01/rsync-deployments@7.0.1
       with:
         switches: -avzr --delete
         path: src/
@@ -76,7 +78,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.0
+      uses: burnett01/rsync-deployments@7.0.1
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -96,7 +98,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.0
+      uses: burnett01/rsync-deployments@7.0.1
       with:
         switches: -avzr --delete
         path: src/
@@ -116,7 +118,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.0
+      uses: burnett01/rsync-deployments@7.0.1
       with:
         switches: -avzr --delete
         path: src/
@@ -142,7 +144,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.0
+      uses: burnett01/rsync-deployments@7.0.1
       with:
         switches: -avzr --delete
         legacy_allow_rsa_hostkeys: "true"
