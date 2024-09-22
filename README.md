@@ -46,7 +46,7 @@ For simplicity, we are using `DEPLOY_*` as the secret variables throughout the e
 
 Simple:
 
-```
+```yml
 name: DEPLOY
 on:
   push:
@@ -71,7 +71,7 @@ jobs:
 
 Advanced:
 
-```
+```yml
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -91,7 +91,7 @@ jobs:
 
 For better **security**, I suggest you create additional secrets for remote_host, remote_port, remote_user and remote_path inputs.
 
-```
+```yml
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -111,7 +111,7 @@ jobs:
 
 If your private key is passphrase protected you should use:
 
-```
+```yml
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -137,7 +137,7 @@ jobs:
 If your remote OpenSSH Server still uses RSA hostkeys, then you have to
 manually enable legacy support for this by using ``legacy_allow_rsa_hostkeys: "true"``.
 
-```
+```yml
 jobs:
   deploy:
     runs-on: ubuntu-latest
