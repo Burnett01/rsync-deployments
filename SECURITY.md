@@ -4,15 +4,17 @@
 
 The following versions are currently being supported with security updates:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 7.x   | :white_check_mark: |
-| 6.x   | :information_source: MAINTENANCE |
-| 5.x   | :warning: DEPRECATED |
-| 4.x   | :x: EOL |
-| 3.0   | :x: EOL |
-| 2.0   | :x: EOL               |
-| 1.0   | :x: EOL               |
+| Version | Supported          | Rsync version          |
+| ------- | ------------------ | ------------------ |
+| 7.0.2   | :white_check_mark: | >= 3.4.0 |
+| 7.0.1   | :warning: DEPRECATED | < 3.4.0 |
+| 7.0.0   | :warning: DEPRECATED | < 3.4.0|
+| 6.x   | :x: EOL |< 3.4.0|
+| 5.x   | :x: EOL |< 3.4.0|
+| 4.x   | :x: EOL |< 3.4.0|
+| 3.0   | :x: EOL |< 3.4.0|
+| 2.0   | :x: EOL               |< 3.4.0|
+| 1.0   | :x: EOL               |< 3.4.0|
 
 ## Reporting a Vulnerability
 
