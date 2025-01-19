@@ -6,6 +6,9 @@ Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPA
 
 The base-image [drinternet/rsync](https://github.com/JoshPiper/rsync-docker/) of this action is very small and is based on Alpine 3.19.1 (no cache) which results in fast deployments.
 
+Alpine version: [3.19.1](https://alpinelinux.org/posts/Alpine-3.19.1-released.html)
+Rsync version: [3.4.0-r0](https://download.samba.org/pub/rsync/NEWS#3.4.0)
+
 ---
 
 ## Inputs
@@ -40,7 +43,7 @@ This action needs secret variables for the ssh private key of your key pair. The
 
 For simplicity, we are using `DEPLOY_*` as the secret variables throughout the examples.
 
-## Current Version: 7.0.1
+## Current Version: 7.0.2
 
 ## Example usage
 
@@ -59,7 +62,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.1
+      uses: burnett01/rsync-deployments@7.0.2
       with:
         switches: -avzr --delete
         path: src/
@@ -78,7 +81,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.1
+      uses: burnett01/rsync-deployments@7.0.2
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -98,7 +101,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.1
+      uses: burnett01/rsync-deployments@7.0.2
       with:
         switches: -avzr --delete
         path: src/
@@ -118,7 +121,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.1
+      uses: burnett01/rsync-deployments@7.0.2
       with:
         switches: -avzr --delete
         path: src/
@@ -144,7 +147,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.1
+      uses: burnett01/rsync-deployments@7.0.2
       with:
         switches: -avzr --delete
         legacy_allow_rsa_hostkeys: "true"
@@ -160,7 +163,16 @@ See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](ht
 
 ---
 
-## Version 6.0 (MAINTENANCE)
+## Version 7.0.0 & 7.0.1 (DEPRECATED)
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/7.0.0  (alpine 3.19.1)
+- https://github.com/Burnett01/rsync-deployments/tree/7.0.1  (alpine 3.19.1)
+  
+---
+
+## Version 6.0 (EOL)
 
 Check here: 
 
@@ -168,7 +180,7 @@ Check here:
 
 ---
 
-## Version 5.0, 5.1 & 5.2 & 5.x (DEPRECATED)
+## Version 5.0, 5.1 & 5.2 & 5.x (EOL)
 
 Check here: 
 
@@ -227,28 +239,15 @@ This action was featured in multiple blogs across the globe:
 
 > Disclaimer: The author & co-authors are not responsible for the content of the site-links below.
 
-- https://leobrack.co.uk/blog/2020-02-15-automatically-push-changes-to-your-live-site-with-github-actions
-
-- https://blog.maniak.co/ci-cd-for-wordpress/
-
 - https://elijahverdoorn.com/2020/04/14/automating-deployment-with-github-actions/
 
 - https://www.vektor-inc.co.jp/post/github-actions-deploy/
-
-- https://ews.ink/tech/blog-deploy-2/
 
 - https://webpick.info/automatiser-avec-github-actions/
 
 - https://matthias-andrasch.eu/blog/2021/tutorial-webseite-mittels-github-actions-deployment-zu-uberspace-uebertragen-rsync/
 
-- https://mikael.koutero.me/posts/hugo-github-actions-deploy-rsync/
-
-- https://cdmana.com/2021/02/20210208122400688I.html
-
 - https://jishuin.proginn.com/p/763bfbd38928
 
 - https://cloud.tencent.com/developer/article/1786522
 
-- http://www.ningco.cn/github_action_deploy_blog/
-
-- https://qdmana.com/2021/01/20210127094413405u.html
