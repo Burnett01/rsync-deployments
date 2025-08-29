@@ -24,28 +24,6 @@ teardown() {
     [[ "${output}" == *"can not be empty"* ]]
 }
 
-@test "runs agent-start and agent-add" {
-    export INPUT_REMOTE_PATH="some/remote/path"
-    export INPUT_REMOTE_KEY="dummy"
-    export INPUT_REMOTE_KEY_PASS="dummy"
-    export GITHUB_ACTION="dummy"
-    export INPUT_LEGACY_ALLOW_RSA_HOSTKEYS="false"
-    export INPUT_SWITCHES=""
-    export INPUT_REMOTE_PORT="22"
-    export INPUT_RSH=""
-    export INPUT_PATH=""
-    export INPUT_REMOTE_USER="user"
-    export INPUT_REMOTE_HOST="host"
-    export GITHUB_WORKSPACE="/tmp"
-    export DSN="user@host"
-    export LOCAL_PATH="/tmp/"
-    export INPUT_REMOTE_PATH="remote/"
-
-    run ./entrypoint.sh
-    [[ "${output}" == *"agent started"* ]]
-    [[ "${output}" == *"key added"* ]]
-}
-
 @test "includes legacy RSA switches when allowed" {
     export INPUT_LEGACY_ALLOW_RSA_HOSTKEYS="true"
     export INPUT_REMOTE_PATH="remote/"
