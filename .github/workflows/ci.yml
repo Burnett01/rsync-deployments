@@ -1,0 +1,170 @@
+# GitHub Actions CI workflow for rsync-deployments
+# This workflow validates the action on every push and pull request by:
+# - Running BATS tests for the entrypoint script
+# - Validating the action.yml definition
+# - Building and testing the Docker image
+# - Checking file structure and permissions
+# - Linting shell scripts
+# - Running a final integration check
+
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test BATS Suite
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install BATS
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y bats
+
+    - name: Run BATS tests
+      run: bats test/entrypoint.bats
+
+  validate-action:
+    runs-on: ubuntu-latest
+    name: Validate Action Definition
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Validate action.yml
+      run: |
+        # Check if action.yml exists and has required fields
+        if [ ! -f "action.yml" ]; then
+          echo "Error: action.yml not found"
+          exit 1
+        fi
+        
+        # Basic validation that action.yml contains required fields
+        python3 -c "
+        import yaml
+        import sys
+        
+        with open('action.yml', 'r') as f:
+            action = yaml.safe_load(f)
+        
+        required_fields = ['name', 'description', 'inputs', 'runs']
+        for field in required_fields:
+            if field not in action:
+                print(f'Missing required field: {field}')
+                sys.exit(1)
+        
+        # Check required inputs exist
+        required_inputs = ['switches', 'remote_path', 'remote_host', 'remote_user', 'remote_key']
+        for input_name in required_inputs:
+            if input_name not in action['inputs']:
+                print(f'Missing required input: {input_name}')
+                sys.exit(1)
+            if not action['inputs'][input_name].get('required', False):
+                print(f'Input {input_name} should be marked as required')
+                sys.exit(1)
+        
+        print('Action definition is valid')
+        "
+
+  docker-build:
+    runs-on: ubuntu-latest
+    name: Build Docker Image
+    needs: [validate-action, action-structure]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build Docker image
+      run: |
+        echo "Building Docker image..."
+        docker build -t rsync-deployments . --no-cache
+        echo "Docker image built successfully"
+
+    - name: Test Docker image basic functionality
+      run: |
+        # Test that the Docker image can run basic commands
+        echo "Testing basic Docker functionality..."
+        docker run --rm rsync-deployments which rsync
+        echo "Docker image test completed"
+
+  action-structure:
+    runs-on: ubuntu-latest
+    name: Validate Action Structure
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check required files
+      run: |
+        echo "Checking required files exist..."
+        
+        # Check all required files exist
+        required_files=("action.yml" "Dockerfile" "entrypoint.sh")
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "Error: Required file $file not found"
+            exit 1
+          fi
+          echo "✓ $file exists"
+        done
+        
+        # Check entrypoint is executable
+        if [ ! -x "entrypoint.sh" ]; then
+          echo "Error: entrypoint.sh is not executable"
+          exit 1
+        fi
+        echo "✓ entrypoint.sh is executable"
+        
+        # Check basic script syntax
+        bash -n entrypoint.sh
+        echo "✓ entrypoint.sh has valid syntax"
+        
+        echo "All structure checks passed!"
+
+  lint-shell:
+    runs-on: ubuntu-latest
+    name: Lint Shell Scripts
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install ShellCheck
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y shellcheck
+
+    - name: Lint entrypoint.sh
+      run: |
+        echo "Linting shell scripts..."
+        # Run shellcheck with exclusions for Docker-specific dependencies
+        shellcheck -e SC1091 -e SC3046 entrypoint.sh || {
+          echo "ShellCheck found issues, but running with Docker-specific exclusions..."
+          shellcheck -e SC1091 -e SC3046 entrypoint.sh
+        }
+        echo "Shell script linting completed"
+
+  integration-check:
+    runs-on: ubuntu-latest
+    name: Integration Check
+    needs: [test, validate-action, docker-build, action-structure, lint-shell]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Final integration check
+      run: |
+        echo "All CI jobs completed successfully!"
+        echo "✅ BATS tests passed"
+        echo "✅ Action definition validated"
+        echo "✅ Docker image built and tested"
+        echo "✅ File structure validated"
+        echo "✅ Shell scripts linted"
+        echo ""
+        echo "🎉 rsync-deployments action is ready for use!"
