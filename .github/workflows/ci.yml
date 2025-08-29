@@ -1,3 +1,12 @@
+# GitHub Actions CI workflow for rsync-deployments
+# This workflow validates the action on every push and pull request by:
+# - Running BATS tests for the entrypoint script
+# - Validating the action.yml definition
+# - Building and testing the Docker image
+# - Checking file structure and permissions
+# - Linting shell scripts
+# - Running a final integration check
+
 name: CI
 
 on:
@@ -67,6 +76,7 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     name: Build Docker Image
+    needs: [validate-action, action-structure]
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -139,3 +149,22 @@ jobs:
           shellcheck -e SC1091 -e SC3046 entrypoint.sh
         }
         echo "Shell script linting completed"
+
+  integration-check:
+    runs-on: ubuntu-latest
+    name: Integration Check
+    needs: [test, validate-action, docker-build, action-structure, lint-shell]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Final integration check
+      run: |
+        echo "All CI jobs completed successfully!"
+        echo "✅ BATS tests passed"
+        echo "✅ Action definition validated"
+        echo "✅ Docker image built and tested"
+        echo "✅ File structure validated"
+        echo "✅ Shell scripts linted"
+        echo ""
+        echo "🎉 rsync-deployments action is ready for use!"
