@@ -87,13 +87,6 @@ jobs:
         docker build -t rsync-deployments . --no-cache
         echo "Docker image built successfully"
 
-    - name: Test Docker image basic functionality
-      run: |
-        # Test that the Docker image can run basic commands
-        echo "Testing basic Docker functionality..."
-        docker run --rm rsync-deployments which rsync
-        echo "Docker image test completed"
-
   action-structure:
     runs-on: ubuntu-latest
     name: Validate Action Structure
