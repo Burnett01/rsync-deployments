@@ -4,10 +4,10 @@ This GitHub Action (amd64) deploys files in `GITHUB_WORKSPACE` to a remote folde
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
 
-The base-image [drinternet/rsync](https://github.com/JoshPiper/rsync-docker/) of this action is very small and is based on Alpine 3.19.1 (no cache) which results in fast deployments.
+The base-image [drinternet/rsync](https://github.com/JoshPiper/rsync-docker/) of this action is very small and is based on Alpine 3.22.1 (no cache) which results in fast deployments.
 
-Alpine version: [3.19.1](https://alpinelinux.org/posts/Alpine-3.19.1-released.html)
-Rsync version: [3.4.0-r0](https://download.samba.org/pub/rsync/NEWS#3.4.0)
+Alpine version: [3.22.1](https://alpinelinux.org/posts/Alpine-3.19.8-3.20.7-3.21.4-3.22.1-released.html)
+Rsync version: [3.4.1-r0](https://download.samba.org/pub/rsync/NEWS#3.4.1)
 
 ---
 
@@ -43,7 +43,7 @@ This action needs secret variables for the ssh private key of your key pair. The
 
 For simplicity, we are using `DEPLOY_*` as the secret variables throughout the examples.
 
-## Current Version: 7.0.2
+## Current Version: 7.1.0
 
 ## Example usage
 
@@ -62,7 +62,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.2
+      uses: burnett01/rsync-deployments@7.1.0
       with:
         switches: -avzr --delete
         path: src/
@@ -81,7 +81,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.2
+      uses: burnett01/rsync-deployments@7.1.0
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -101,7 +101,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.2
+      uses: burnett01/rsync-deployments@7.1.0
       with:
         switches: -avzr --delete
         path: src/
@@ -121,7 +121,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.2
+      uses: burnett01/rsync-deployments@7.1.0
       with:
         switches: -avzr --delete
         path: src/
@@ -147,7 +147,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@7.0.2
+      uses: burnett01/rsync-deployments@7.1.0
       with:
         switches: -avzr --delete
         legacy_allow_rsa_hostkeys: "true"
@@ -161,6 +161,14 @@ jobs:
 
 See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](https://github.com/Burnett01/rsync-deployments/issues/24) for more information.
 
+---
+
+## Version 7.0.2
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/7.0.2  (alpine 3.19.1)
+  
 ---
 
 ## Version 7.0.0 & 7.0.1 (DEPRECATED)

@@ -6,6 +6,7 @@ The following versions are currently being supported with security updates:
 
 | Version | Supported          | Rsync version          |
 | ------- | ------------------ | ------------------ |
+| 7.1.0  | :white_check_mark: | >= 3.4.1 |
 | 7.0.2   | :white_check_mark: | >= 3.4.0 |
 | 7.0.1   | :warning: DEPRECATED | < 3.4.0 |
 | 7.0.0   | :warning: DEPRECATED | < 3.4.0|
