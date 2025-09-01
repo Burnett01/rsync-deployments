@@ -28,6 +28,17 @@ fi
 STRICT_HOSTKEYS_CHECKING="-o StrictHostKeyChecking=no"
 if [ "${INPUT_STRICT_HOSTKEYS_CHECKING:-false}" = "true" ]; then
     STRICT_HOSTKEYS_CHECKING="-o StrictHostKeyChecking=yes"
+
+    key="$(ssh-keyscan -p "$INPUT_REMOTE_PORT" "$INPUT_REMOTE_HOST" 2>/dev/null)" || key=""
+    if [ -n "$key" ]; then
+        # fingerprint verification
+        echo "$key" | ssh-keygen -lf -
+        # add to known hosts
+        echo "$key" | while IFS= read -r line; do hosts-add "$line"; done
+    else
+        echo "Warning: failed to fetch host key for $INPUT_REMOTE_HOST" >&2
+        exit 1
+    fi
 fi
 
 RSH="ssh $STRICT_HOSTKEYS_CHECKING $LEGACY_RSA_HOSTKEYS -p $INPUT_REMOTE_PORT $INPUT_RSH"
