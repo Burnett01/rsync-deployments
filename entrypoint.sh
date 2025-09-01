@@ -9,6 +9,7 @@ fi
 
 # Initialize SSH and known hosts.
 source ssh-init
+source hosts-init
 
 # Start the SSH agent and load key.
 source agent-start default
@@ -34,4 +35,6 @@ sh -c "rsync $INPUT_SWITCHES -e '$RSH' $LOCAL_PATH $DSN:$INPUT_REMOTE_PATH"
 
 # Clean up.
 source agent-stop "$GITHUB_ACTION"
+source hosts-clear
 
+exit 0
