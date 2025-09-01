@@ -3,7 +3,7 @@
 set -euo pipefail
 
 if [ "${INPUT_DEBUG:-false}" = "true" ]; then
-    set +x
+    set -x
 fi
 
 if [ -z "$(echo "$INPUT_REMOTE_PATH" | awk '{$1=$1};1')" ]; then
