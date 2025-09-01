@@ -11,7 +11,7 @@ fi
 source ssh-init
 
 # Start the SSH agent and load key.
-source agent-start "$GITHUB_ACTION"
+source agent-start default
 printf '%s' "$INPUT_REMOTE_KEY" | SSH_PASS="${INPUT_REMOTE_KEY_PASS}" agent-add >/dev/null 2>&1
 
 # Variables.
