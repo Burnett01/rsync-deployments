@@ -1,4 +1,4 @@
-name: Snyk Container
+name: Snyk Docker Vulnerability Scan
 
 on:
   push:
