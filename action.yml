@@ -41,6 +41,10 @@ inputs:
     description: 'The remote key passphrase'
     required: false
     default: ''
+  debug:
+    description: 'Debug the action'
+    required: false
+    default: 'false'
 runs:
   using: 'docker'
   image: 'Dockerfile'
