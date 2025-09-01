@@ -1,5 +1,11 @@
 # rsync deployments
 
+[![CI - Validating, Linting, Testing](https://github.com/Burnett01/rsync-deployments/actions/workflows/ci-validating-linting-testing.yml/badge.svg)](https://github.com/Burnett01/rsync-deployments/actions/workflows/ci-validating-linting-testing.yml) 
+[![Snyk Docker Vulnerability Scan](https://github.com/Burnett01/rsync-deployments/actions/workflows/snyk-docker-vulnerability-scan.yml/badge.svg)](https://github.com/Burnett01/rsync-deployments/actions/workflows/snyk-docker-vulnerability-scan.yml) 
+[![CodeQL](https://github.com/Burnett01/rsync-deployments/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Burnett01/rsync-deployments/actions/workflows/github-code-scanning/codeql) 
+[![Dependabot Updates](https://github.com/Burnett01/rsync-deployments/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/Burnett01/rsync-deployments/actions/workflows/dependabot/dependabot-updates)
+
+
 This GitHub Action (amd64) deploys files in `GITHUB_WORKSPACE` to a remote folder via rsync over ssh. 
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
