@@ -247,11 +247,19 @@ Please note that version 1.0 has reached end of life state.
 
 ---
 
-## Media
+## Media & Pingback
 
 This action was featured in multiple blogs across the globe:
 
 > Disclaimer: The author & co-authors are not responsible for the content of the site-links below.
+
+- https://hosting.xyz/wiki/hosting/other/github-actions/
+
+- https://www.alexander-palm.de/2025/07/22/sichere-rsync-deployments-mit-github-actions-und-rrsync/
+
+- https://lab.uberspace.de/howto_automatic-deployment/
+
+- https://blog.devops.dev/setting-up-an-ubuntu-instance-for-nodejs-apps-in-ovh-cloud-using-nginx-pm2-github-actions-7618c768d081
 
 - https://elijahverdoorn.com/2020/04/14/automating-deployment-with-github-actions/
 
