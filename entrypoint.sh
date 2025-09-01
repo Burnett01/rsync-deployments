@@ -29,7 +29,7 @@ STRICT_HOSTKEYS_CHECKING="-o StrictHostKeyChecking=no"
 if [ "${INPUT_STRICT_HOSTKEYS_CHECKING:-false}" = "true" ]; then
     STRICT_HOSTKEYS_CHECKING="-o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes"
 
-    key="$(ssh-keyscan -p "$INPUT_REMOTE_PORT" "$INPUT_REMOTE_HOST" 2>/dev/null)" | sed '/^#/d' || key=""
+    key="$(ssh-keyscan -p "$INPUT_REMOTE_PORT" "$INPUT_REMOTE_HOST" 2>/dev/null | sed '/^#/d')" || key=""
     if [ -n "$key" ]; then
         # fingerprint verification
         echo "$key" | ssh-keygen -lf -
