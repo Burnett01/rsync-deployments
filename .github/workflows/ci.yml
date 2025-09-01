@@ -7,7 +7,7 @@
 # - Linting shell scripts
 # - Running a final integration check
 
-name: CI
+name: CI - Validating, Linting, Testing
 permissions:
   contents: read
 
