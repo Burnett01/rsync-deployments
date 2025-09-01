@@ -39,6 +39,9 @@ if [ "${INPUT_STRICT_HOSTKEYS_CHECKING:-false}" = "true" ]; then
         echo "Warning: failed to fetch host key for $INPUT_REMOTE_HOST" >&2
         exit 1
     fi
+
+    #debug 
+    cat ~/.ssh/known_hosts
 fi
 
 RSH="ssh $STRICT_HOSTKEYS_CHECKING $LEGACY_RSA_HOSTKEYS -p $INPUT_REMOTE_PORT $INPUT_RSH"
