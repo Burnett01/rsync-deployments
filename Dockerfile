@@ -5,7 +5,7 @@ RUN apk update && apk add --no-cache --upgrade rsync openssh-client openssl
 RUN rm -rf /var/cache/apk/*
 
 COPY docker-rsync/* /bin/
-RUN chmod +x /bin/agent-* /bin/hosts-*
+RUN chmod +x /bin/agent-*
 
 FROM base as build
 
