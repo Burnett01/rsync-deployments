@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -euo pipefail
+
+truncate -s 0 ~/.ssh/known_hosts
