@@ -35,6 +35,10 @@ if [ "${INPUT_STRICT_HOSTKEYS_CHECKING:-false}" = "true" ]; then
         echo "$key" | ssh-keygen -lf -
         # add to known hosts
         echo "$key" | while IFS= read -r line; do hosts-add "$line"; done
+
+        set +x
+        echo "debug"
+        cat "~/.ssh/known_hosts"
     else
         echo "Warning: failed to fetch host key for $INPUT_REMOTE_HOST" >&2
         exit 1
