@@ -8,6 +8,8 @@
 # - Running a final integration check
 
 name: CI
+permissions:
+  contents: read
 
 on:
   push:
