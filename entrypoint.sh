@@ -27,7 +27,7 @@ fi
 
 STRICT_HOSTKEYS_CHECKING="-o StrictHostKeyChecking=no"
 if [ "${INPUT_STRICT_HOSTKEYS_CHECKING:-false}" = "true" ]; then
-    STRICT_HOSTKEYS_CHECKING="-o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes"
+    STRICT_HOSTKEYS_CHECKING="-o UserKnownHostsFile=$HOME/.ssh/known_hosts -o StrictHostKeyChecking=yes"
 
     key="$(ssh-keyscan -p "$INPUT_REMOTE_PORT" "$INPUT_REMOTE_HOST" 2>/dev/null | sed '/^#/d')" || key=""
     if [ -n "$key" ]; then
@@ -38,7 +38,7 @@ if [ "${INPUT_STRICT_HOSTKEYS_CHECKING:-false}" = "true" ]; then
 
         set +x
         echo "debug"
-        cat "~/.ssh/known_hosts"
+        cat $HOME/.ssh/known_hosts
     else
         echo "Warning: failed to fetch host key for $INPUT_REMOTE_HOST" >&2
         exit 1

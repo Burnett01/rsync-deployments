@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-mkdir -m 700 ~/.ssh
+mkdir -m 700 $HOME/.ssh

@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-truncate -s 0 ~/.ssh/known_hosts
+truncate -s 0 $HOME/.ssh/known_hosts
