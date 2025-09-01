@@ -1,11 +1,14 @@
-# drinternet/rsync@v1.5.1
-FROM drinternet/rsync@sha256:e61f4047577b566872764fa39299092adeab691efb3884248dbd6495dc926527
+FROM alpine:3.22.1 as base
 
-# always force-upgrade rsync to get the latest security fixes
-RUN apk update && apk add --no-cache --upgrade rsync openssl
+RUN apk update && apk add --no-cache --upgrade rsync openssh-client openssl
+
 RUN rm -rf /var/cache/apk/*
 
-# Copy entrypoint
+COPY docker-rsync/* /bin/
+RUN chmod +x /bin/agent-* /bin/hosts-*
+
+FROM base as build
+
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

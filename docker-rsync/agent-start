@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -euo pipefail
+
+FOLDER=${1:-default}
+STORE_PATH="/tmp/ssh-agent/$FOLDER"
+mkdir -p "$STORE_PATH"
+
+if [ -z "$SSH_AGENT_PID" ]; then
+	if [ -f "$STORE_PATH/id" ]; then
+		SSH_AGENT_PID=$(cat "$STORE_PATH/id")
+		export SSH_AGENT_PID
+
+		SSH_AUTH_SOCK=$(cat "$STORE_PATH/sock")
+		export SSH_AUTH_SOCK
+	else
+		eval "$(ssh-agent)" > /dev/null
+		echo "$SSH_AGENT_PID" > "$STORE_PATH"/id
+		echo "$SSH_AUTH_SOCK" > "$STORE_PATH"/sock
+	fi
+fi

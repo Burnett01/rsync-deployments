@@ -13,6 +13,10 @@ inputs:
     description: 'Enables support for legacy RSA host keys on OpenSSH 8.8+'
     required: false
     default: 'false'
+  strict_hostkeys_checking:
+    description: 'Controls strict host keys checking'
+    required: false
+    default: 'false'
   path:
     description: 'The local path'
     required: false

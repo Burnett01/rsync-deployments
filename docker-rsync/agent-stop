@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -euo pipefail
+
+if [ ! -z "$SSH_AGENT_PID" ]; then
+	# Here, the environment is set already, just kill the script.
+	eval $(ssh-agent -k) >/dev/null
+	exit $?
+else
+	# The env isn't set, construct the file path.
+	FOLDER=${1:-default}
+	STORE_PATH="/tmp/ssh-agent/$FOLDER"
+	if [ ! -d "$STORE_PATH" ]; then
+		echo "Store Path $STORE_PATH doesn't exist!" >&2
+		exit 1
+	fi
+
+	# And check our files exist.
+	if [ -f "$STORE_PATH/id" ]; then
+		# Grab our PID and socket.
+		SSH_AGENT_PID=$(cat "$STORE_PATH/id")
+		export SSH_AGENT_PID
+		rm "$STORE_PATH/id"
+
+		SSH_AUTH_SOCK=$(cat "$STORE_PATH/sock")
+		export SSH_AUTH_SOCK
+		rm "$STORE_PATH/sock"
+
+
+		rmdir "$STORE_PATH"
+		eval $(ssh-agent -k) >/dev/null
+		exit $?
+	else
+		echo "SSH_AGENT_PID not set, $STORE_PATH/id doesn't exist!" >&2
+		exit 1
+	fi
+fi
