@@ -220,7 +220,7 @@ If your remote server has firewall restrictions:
 
 ### Excluding files/folders (eg .git) 
 
-By default, rsync copies dot files and folder if present at ``path:``. To execlude them, you can use the ``--exclude`` switch:
+By default, rsync copies dot files and folder if present at ``path:``. To exclude them, you can use the ``--exclude`` switch:
 
 ```yml
 switches: -avzr --delete --exclude='.git/'
