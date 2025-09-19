@@ -35,9 +35,9 @@ Rsync version: [3.4.1-r0](https://download.samba.org/pub/rsync/NEWS#3.4.1)
 
 - `remote_user`* - The remote user
 
-- `remote_key`* - The remote ssh key
+- `remote_key`* - The remote ssh private key
 
-- `remote_key_pass` - The remote ssh key passphrase (if any)
+- `remote_key_pass` - The remote ssh private key passphrase (if any)
 
 ``* = Required``
 
@@ -47,7 +47,7 @@ This action needs secret variables for the ssh private key of your key pair. The
 
 > Always use secrets when dealing with sensitive inputs!
 
-For simplicity, we are using `DEPLOY_PRIVATE_KEY` and other `DEPLOY_*` as the secret variables throughout the examples.
+For simplicity, we are using `REMOTE_*` as the secret variables throughout the examples.
 
 ## Current Version: 7.1.0
 
@@ -75,7 +75,7 @@ jobs:
         remote_path: /var/www/html/
         remote_host: example.com
         remote_user: debian
-        remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
 ```
 
 Advanced:
@@ -95,7 +95,7 @@ jobs:
         remote_host: example.com
         remote_port: 5555
         remote_user: debian
-        remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
 ```
 
 For better **security**, I suggest you create additional secrets for remote_host, remote_port, remote_user and remote_path inputs.
@@ -111,11 +111,11 @@ jobs:
       with:
         switches: -avzr --delete
         path: src/
-        remote_path: ${{ secrets.DEPLOY_PATH }}
-        remote_host: ${{ secrets.DEPLOY_HOST }}
-        remote_port: ${{ secrets.DEPLOY_PORT }}
-        remote_user: ${{ secrets.DEPLOY_USER }}
-        remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+        remote_path: ${{ secrets.REMOTE_PATH }}
+        remote_host: ${{ secrets.REMOTE_HOST }}
+        remote_port: ${{ secrets.REMOTE_PORT }}
+        remote_user: ${{ secrets.REMOTE_USER }}
+        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
 ```
 
 If your private key is passphrase protected you should use:
@@ -131,12 +131,12 @@ jobs:
       with:
         switches: -avzr --delete
         path: src/
-        remote_path: ${{ secrets.DEPLOY_PATH }}
-        remote_host: ${{ secrets.DEPLOY_HOST }}
-        remote_port: ${{ secrets.DEPLOY_PORT }}
-        remote_user: ${{ secrets.DEPLOY_USER }}
-        remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-        remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
+        remote_path: ${{ secrets.REMOTE_PATH }}
+        remote_host: ${{ secrets.REMOTE_HOST }}
+        remote_port: ${{ secrets.REMOTE_PORT }}
+        remote_user: ${{ secrets.REMOTE_USER }}
+        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
+        remote_key_pass: ${{ secrets.REMOTE_PRIVATE_KEY_PASS }}
 ```
 
 ---
@@ -158,14 +158,22 @@ jobs:
         switches: -avzr --delete
         legacy_allow_rsa_hostkeys: "true"
         path: src/
-        remote_path: ${{ secrets.DEPLOY_PATH }}
-        remote_host: ${{ secrets.DEPLOY_HOST }}
-        remote_port: ${{ secrets.DEPLOY_PORT }}
-        remote_user: ${{ secrets.DEPLOY_USER }}
-        remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+        remote_path: ${{ secrets.REMOTE_PATH }}
+        remote_host: ${{ secrets.REMOTE_HOST }}
+        remote_port: ${{ secrets.REMOTE_PORT }}
+        remote_user: ${{ secrets.REMOTE_USER }}
+        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
 ```
 
 See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](https://github.com/Burnett01/rsync-deployments/issues/24) for more information.
+
+**Note:** Only use this if necessary. It's recommended to upgrade your remote OpenSSH server instead.
+
+--
+
+## Advanced Rsync switches/flags/options
+
+For advanced rsync configuration options and switches, refer to the [rsync manual](https://linux.die.net/man/1/rsync).
 
 ---
 
@@ -173,15 +181,11 @@ See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](ht
 
 ### SSH Permission Denied Errors
 
-If you encounter "Permission denied (publickey,password)" errors, this typically indicates authentication issues between GitHub Actions and your server. **This is the most common deployment problem** and usually stems from incorrect SSH key setup, server configuration, or firewall restrictions.
+If you encounter "Permission denied (publickey,password)" errors, here are the most common solutions:
 
-For advanced rsync configuration options and switches, refer to the [rsync manual](https://linux.die.net/man/1/rsync).
+#### 1. SSH Key Setup
 
-Here are the most common solutions:
-
-#### 1. SSH Key Setup Issues
-
-Ensure your SSH key pair is correctly generated and configured. For detailed information on creating and managing SSH keys, see [GitHub's SSH Key Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+Ensure your SSH key pair is correctly generated and configured:
 
 ```bash
 # Generate a new SSH key pair (recommended: Ed25519 or RSA 4096-bit)
@@ -192,33 +196,31 @@ ssh-keygen -t rsa -b 4096 -C "deploy@yourproject" -f ~/.ssh/deploy_yourproject -
 
 **Important Steps:**
 - Add the **public key** (`.pub` file) to your server's `~/.ssh/authorized_keys`
-- Add the **private key** (without `.pub` extension) to GitHub Secrets as `DEPLOY_PRIVATE_KEY`
+- Add the **private key** (without `.pub` extension) to GitHub Secrets as `REMOTE_PRIVATE_KEY`
 - Ensure correct file permissions on your server:
   ```bash
   chmod 700 ~/.ssh
   chmod 600 ~/.ssh/authorized_keys
   ```
 
-#### 2. Legacy RSA Hostkeys (OpenSSH 8.8+)
+For detailed information on creating and managing SSH keys, see [GitHub's SSH Key Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 
-If your server uses older OpenSSH versions (&lt; 8.8) with RSA hostkeys, add:
+#### 2. ``remote_path`` permissions
 
-```yml
-legacy_allow_rsa_hostkeys: "true"
-```
+Make sure the ``remote_user`` has write access to ``remote_path``.
 
-**Note:** Only use this if necessary. It's recommended to upgrade your OpenSSH server instead.
+See: https://github.com/Burnett01/rsync-deployments/issues/81#issuecomment-3308152891
 
-#### 3. GitHub Actions IP Restrictions
+#### 3. Firewall / GitHub Actions IP Restrictions
 
-If your server has firewall restrictions:
+If your remote server has firewall restrictions:
 
 - **Option A:** Whitelist [GitHub Actions IP ranges](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#ip-addresses) (Azure-based)
 - **Option B:** Use self-hosted runners on your server (recommended for strict firewall environments)
 
-#### 4. Excluding .git Directory
+#### 3. Excluding files/folders (eg .git) 
 
-By default, rsync copies all directories including `.git`. To exclude it:
+By default, rsync copies dot files and folder if present at ``path:``. To execlude them, you can use the ``--exclude`` switch:
 
 ```yml
 switches: -avzr --delete --exclude='.git/'
@@ -229,35 +231,12 @@ Other common exclusions:
 switches: -avzr --delete --exclude='.git/' --exclude='node_modules/' --exclude='.env'
 ```
 
-#### 5. Testing SSH Connection
+More advanced examples:
 
-Test your SSH connection independently:
-
-```bash
-# Test SSH connection (replace with your details)
-ssh -i ~/.ssh/deploy_yourproject -p 22 username@yourserver.com
-# Test with legacy RSA support if needed:
-ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -i ~/.ssh/deploy_yourproject -p 22 username@yourserver.com
-```
-
-#### 6. Common Configuration Example
-
-Here's a complete working example addressing most common issues:
-
-```yml
-- name: Deploy files to server
-  uses: burnett01/rsync-deployments@7.1.0
-  with:
-    switches: -avzr --delete --exclude='.git/' --exclude='node_modules/'
-    path: ./
-    remote_path: ${{ secrets.DEPLOY_PATH }}
-    remote_host: ${{ secrets.DEPLOY_HOST }}
-    remote_port: ${{ secrets.DEPLOY_PORT }}
-    remote_user: ${{ secrets.DEPLOY_USER }}
-    remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-    # Only add this line if your server uses OpenSSH < 8.8:
-    # legacy_allow_rsa_hostkeys: "true"
-```
+- https://github.com/Burnett01/rsync-deployments/issues/5#issuecomment-667589874
+- https://github.com/Burnett01/rsync-deployments/issues/16
+- https://github.com/Burnett01/rsync-deployments/issues/71
+- https://github.com/Burnett01/rsync-deployments/issues/52
 
 ---
 
