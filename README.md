@@ -218,7 +218,7 @@ If your remote server has firewall restrictions:
 - **Option A:** Whitelist [GitHub Actions IP ranges](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#ip-addresses) (Azure-based)
 - **Option B:** Use self-hosted runners on your server (recommended for strict firewall environments)
 
-#### 3. Excluding files/folders (eg .git) 
+### Excluding files/folders (eg .git) 
 
 By default, rsync copies dot files and folder if present at ``path:``. To execlude them, you can use the ``--exclude`` switch:
 
@@ -239,6 +239,8 @@ More advanced examples:
 - https://github.com/Burnett01/rsync-deployments/issues/52
 
 ---
+
+## Versions
 
 ## Version 7.0.2
 
