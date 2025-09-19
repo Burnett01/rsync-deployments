@@ -169,6 +169,94 @@ See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](ht
 
 ---
 
+## Troubleshooting
+
+### SSH Permission Denied Errors
+
+If you encounter "Permission denied (publickey,password)" errors, here are the most common solutions:
+
+#### 1. SSH Key Setup Issues
+
+Ensure your SSH key pair is correctly generated and configured:
+
+```bash
+# Generate a new SSH key pair (recommended: Ed25519 or RSA 4096-bit)
+ssh-keygen -t ed25519 -C "deploy@yourproject" -f ~/.ssh/deploy_yourproject -N ""
+# OR for RSA:
+ssh-keygen -t rsa -b 4096 -C "deploy@yourproject" -f ~/.ssh/deploy_yourproject -N ""
+```
+
+**Important Steps:**
+- Add the **public key** (`.pub` file) to your server's `~/.ssh/authorized_keys`
+- Add the **private key** (without `.pub` extension) to GitHub Secrets as `SSH_PRIVATE_KEY`
+- Ensure correct file permissions on your server:
+  ```bash
+  chmod 700 ~/.ssh
+  chmod 600 ~/.ssh/authorized_keys
+  ```
+
+#### 2. Legacy RSA Hostkeys (OpenSSH 8.8+)
+
+If your server uses older OpenSSH versions (&lt; 8.8) with RSA hostkeys, add:
+
+```yml
+legacy_allow_rsa_hostkeys: "true"
+```
+
+**Note:** Only use this if necessary. It's recommended to upgrade your OpenSSH server instead.
+
+#### 3. GitHub Actions IP Restrictions
+
+If your server has firewall restrictions:
+
+- **Option A:** Whitelist [GitHub Actions IP ranges](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#ip-addresses) (Azure-based)
+- **Option B:** Use self-hosted runners on your server (recommended for strict firewall environments)
+
+#### 4. Excluding .git Directory
+
+By default, rsync copies all directories including `.git`. To exclude it:
+
+```yml
+switches: -avzr --delete --exclude='.git/'
+```
+
+Other common exclusions:
+```yml
+switches: -avzr --delete --exclude='.git/' --exclude='node_modules/' --exclude='.env'
+```
+
+#### 5. Testing SSH Connection
+
+Test your SSH connection independently:
+
+```bash
+# Test SSH connection (replace with your details)
+ssh -i ~/.ssh/deploy_yourproject -p 22 username@yourserver.com
+# Test with legacy RSA support if needed:
+ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -i ~/.ssh/deploy_yourproject -p 22 username@yourserver.com
+```
+
+#### 6. Common Configuration Example
+
+Here's a complete working example addressing most common issues:
+
+```yml
+- name: Deploy files to server
+  uses: burnett01/rsync-deployments@7.1.0
+  with:
+    switches: -avzr --delete --exclude='.git/' --exclude='node_modules/'
+    path: ./
+    remote_path: ${{ secrets.DEPLOY_PATH }}
+    remote_host: ${{ secrets.DEPLOY_HOST }}
+    remote_port: ${{ secrets.DEPLOY_PORT }}
+    remote_user: ${{ secrets.DEPLOY_USER }}
+    remote_key: ${{ secrets.DEPLOY_KEY }}
+    # Only add this line if your server uses OpenSSH < 8.8:
+    # legacy_allow_rsa_hostkeys: "true"
+```
+
+---
+
 ## Version 7.0.2
 
 Check here: 
