@@ -47,7 +47,7 @@ This action needs secret variables for the ssh private key of your key pair. The
 
 > Always use secrets when dealing with sensitive inputs!
 
-For simplicity, we are using `DEPLOY_*` as the secret variables throughout the examples.
+For simplicity, we are using `DEPLOY_PRIVATE_KEY` and other `DEPLOY_*` as the secret variables throughout the examples.
 
 ## Current Version: 7.1.0
 
@@ -75,7 +75,7 @@ jobs:
         remote_path: /var/www/html/
         remote_host: example.com
         remote_user: debian
-        remote_key: ${{ secrets.DEPLOY_KEY }}
+        remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 ```
 
 Advanced:
@@ -95,7 +95,7 @@ jobs:
         remote_host: example.com
         remote_port: 5555
         remote_user: debian
-        remote_key: ${{ secrets.DEPLOY_KEY }}
+        remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 ```
 
 For better **security**, I suggest you create additional secrets for remote_host, remote_port, remote_user and remote_path inputs.
@@ -115,7 +115,7 @@ jobs:
         remote_host: ${{ secrets.DEPLOY_HOST }}
         remote_port: ${{ secrets.DEPLOY_PORT }}
         remote_user: ${{ secrets.DEPLOY_USER }}
-        remote_key: ${{ secrets.DEPLOY_KEY }}
+        remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 ```
 
 If your private key is passphrase protected you should use:
@@ -135,7 +135,7 @@ jobs:
         remote_host: ${{ secrets.DEPLOY_HOST }}
         remote_port: ${{ secrets.DEPLOY_PORT }}
         remote_user: ${{ secrets.DEPLOY_USER }}
-        remote_key: ${{ secrets.DEPLOY_KEY }}
+        remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
         remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
 ```
 
@@ -162,7 +162,7 @@ jobs:
         remote_host: ${{ secrets.DEPLOY_HOST }}
         remote_port: ${{ secrets.DEPLOY_PORT }}
         remote_user: ${{ secrets.DEPLOY_USER }}
-        remote_key: ${{ secrets.DEPLOY_KEY }}
+        remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 ```
 
 See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](https://github.com/Burnett01/rsync-deployments/issues/24) for more information.
@@ -173,11 +173,15 @@ See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](ht
 
 ### SSH Permission Denied Errors
 
-If you encounter "Permission denied (publickey,password)" errors, here are the most common solutions:
+If you encounter "Permission denied (publickey,password)" errors, this typically indicates authentication issues between GitHub Actions and your server. **This is the most common deployment problem** and usually stems from incorrect SSH key setup, server configuration, or firewall restrictions.
+
+For advanced rsync configuration options and switches, refer to the [rsync manual](https://linux.die.net/man/1/rsync).
+
+Here are the most common solutions:
 
 #### 1. SSH Key Setup Issues
 
-Ensure your SSH key pair is correctly generated and configured:
+Ensure your SSH key pair is correctly generated and configured. For detailed information on creating and managing SSH keys, see [GitHub's SSH Key Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 
 ```bash
 # Generate a new SSH key pair (recommended: Ed25519 or RSA 4096-bit)
@@ -188,7 +192,7 @@ ssh-keygen -t rsa -b 4096 -C "deploy@yourproject" -f ~/.ssh/deploy_yourproject -
 
 **Important Steps:**
 - Add the **public key** (`.pub` file) to your server's `~/.ssh/authorized_keys`
-- Add the **private key** (without `.pub` extension) to GitHub Secrets as `SSH_PRIVATE_KEY`
+- Add the **private key** (without `.pub` extension) to GitHub Secrets as `DEPLOY_PRIVATE_KEY`
 - Ensure correct file permissions on your server:
   ```bash
   chmod 700 ~/.ssh
@@ -250,7 +254,7 @@ Here's a complete working example addressing most common issues:
     remote_host: ${{ secrets.DEPLOY_HOST }}
     remote_port: ${{ secrets.DEPLOY_PORT }}
     remote_user: ${{ secrets.DEPLOY_USER }}
-    remote_key: ${{ secrets.DEPLOY_KEY }}
+    remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
     # Only add this line if your server uses OpenSSH < 8.8:
     # legacy_allow_rsa_hostkeys: "true"
 ```
