@@ -238,6 +238,27 @@ More advanced examples:
 - https://github.com/Burnett01/rsync-deployments/issues/71
 - https://github.com/Burnett01/rsync-deployments/issues/52
 
+### Missing rsync on Remote Host
+
+If the action fails with "rsync: command not found" or similar errors, rsync is not installed on your remote server. Install it using your system's package manager:
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get update && sudo apt-get install rsync
+```
+
+**CentOS/RHEL/Rocky/AlmaLinux:**
+```bash
+sudo yum install rsync
+# OR on newer versions:
+sudo dnf install rsync
+```
+
+**Alpine Linux:**
+```bash
+sudo apk add rsync
+```
+
 ---
 
 ## Versions
