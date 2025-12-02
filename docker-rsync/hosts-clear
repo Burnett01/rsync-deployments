@@ -1,5 +1,5 @@
 #!/bin/sh
 
-set -euo pipefail
+set -euo
 
 truncate -s 0 $HOME/.ssh/known_hosts

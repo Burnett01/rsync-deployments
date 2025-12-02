@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -euo pipefail
+set -euo
 
 if [ "${INPUT_DEBUG:-false}" = "true" ]; then
     set -x

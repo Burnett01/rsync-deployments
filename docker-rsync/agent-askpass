@@ -1,5 +1,5 @@
 #!/bin/sh
 
-set -euo pipefail
+set -euo
 
 echo "$SSH_PASS"

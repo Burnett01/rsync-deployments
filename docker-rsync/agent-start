@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -euo pipefail
+set -euo
 
 FOLDER=${1:-default}
 STORE_PATH="/tmp/ssh-agent/$FOLDER"

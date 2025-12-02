@@ -1,5 +1,5 @@
 #!/bin/sh
 
-set -euo pipefail
+set -euo
 
 mkdir -m 700 $HOME/.ssh
