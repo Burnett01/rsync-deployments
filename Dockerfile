@@ -1,6 +1,6 @@
 FROM alpine:3.22.2 as base
 
-RUN apk update && apk add --no-cache --upgrade rsync openssh-client openssl
+RUN apk update && apk add --no-cache --upgrade rsync openssh-client openssl busybox
 
 RUN rm -rf /var/cache/apk/*
 
