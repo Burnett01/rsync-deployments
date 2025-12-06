@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -euo
+set -eu
 
 source agent-start "${1:-default}"
 cat - | tr -d '\r' | DISPLAY=1 SSH_ASKPASS=agent-askpass ssh-add - >/dev/null

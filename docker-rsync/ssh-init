@@ -1,5 +1,5 @@
 #!/bin/sh
 
-set -euo
+set -eu
 
 mkdir -m 700 $HOME/.ssh

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -euo
+set -eu
 
 touch $HOME/.ssh/known_hosts
 chmod 600 $HOME/.ssh/known_hosts

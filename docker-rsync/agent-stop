@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -euo
+set -eu
 
 if [ ! -z "$SSH_AGENT_PID" ]; then
 	# Here, the environment is set already, just kill the script.

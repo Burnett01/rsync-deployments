@@ -1,5 +1,5 @@
 #!/bin/sh
 
-set -euo
+set -eu
 
 printf '%s\n' "$@" >> $HOME/.ssh/known_hosts

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -euo
+set -eu
 
 if [ "${INPUT_DEBUG:-false}" = "true" ]; then
     set -x
