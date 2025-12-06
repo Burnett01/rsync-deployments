@@ -12,6 +12,7 @@ if [ -z "$(echo "$INPUT_REMOTE_PATH" | awk '{$1=$1};1')" ]; then
 fi
 
 # Initialize SSH and known hosts.
+source ssh-init
 source hosts-init
 
 # Start the SSH agent and load key.
