@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -eu
+
+truncate -s 0 $HOME/.ssh/known_hosts

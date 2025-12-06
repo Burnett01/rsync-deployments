@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -eu
+
+echo "$SSH_PASS"
