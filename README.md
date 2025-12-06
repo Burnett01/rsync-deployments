@@ -53,14 +53,14 @@ This action needs secret variables for the ssh private key of your key pair. The
 
 For simplicity, we are using `REMOTE_*` as the secret variables throughout the examples.
 
-## Current Version: v8 (8.0.0)
+## Current Version: v8 (8.0.1)
 
 ### Release channels:
 
 | Version | Purpose          | Immutable  | 
 | ------- | ------------------ | ------------------ | 
 | ``v8``  |  latest release (pointer to 8.x.x) | no, points to latest MINOR,PATCH |
-| 8.0.0  | latest major release | yes |
+| 8.0.1  | latest major release | yes |
 | 7.1.0   | previous release | yes |
 
 Check [SECURITY.md](SECURITY.md) for support cycles.
