@@ -6,9 +6,9 @@
 [![Dependabot Updates](https://github.com/Burnett01/rsync-deployments/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/Burnett01/rsync-deployments/actions/workflows/dependabot/dependabot-updates)
 
 
-This GitHub Action (amd64) deploys files in `GITHUB_WORKSPACE` to a remote folder via rsync over ssh. 
+This cross-platform GitHub Action deploys files in [`path`](#inputs) (relative to  `GITHUB_WORKSPACE`) to a remote folder via rsync over ssh. 
 
-Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
+Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`, such [actions/checkout](https://github.com/actions/checkout).
 
 The base-image of this action is very small and based on **Alpine 3.23.0** (no cache) which results in fast deployments.
 
@@ -80,7 +80,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - name: rsync deployments
       uses: burnett01/rsync-deployments@v8
       with:
@@ -99,7 +99,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - name: rsync deployments
       uses: burnett01/rsync-deployments@v8
       with:
@@ -119,7 +119,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - name: rsync deployments
       uses: burnett01/rsync-deployments@v8
       with:
@@ -139,7 +139,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - name: rsync deployments
       uses: burnett01/rsync-deployments@v8
       with:
@@ -165,7 +165,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - name: rsync deployments
       uses: burnett01/rsync-deployments@v8
       with:
