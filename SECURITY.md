@@ -8,7 +8,7 @@ The following versions are currently being supported with security updates:
 
 | Version | Supported          | Rsync version          | Alpine version          |
 | ------- | ------------------ | ------------------ | ------------------ |
-| 8.0.0  | :white_check_mark: | >= 3.4.1-r1 | 3.22.2 |
+| 8.0.0  | :white_check_mark: | >= 3.4.1-r1 | 3.23.0 |
 | 7.1.0  | :white_check_mark: | >= 3.4.1-r0 | 3.22.1 |
 | 7.0.2   | :warning: DEPRECATED | >= 3.4.0-r0 | 3.22.1 |
 | 7.0.1   | :x: EOL | < 3.4.0 | 3.22.1 |
