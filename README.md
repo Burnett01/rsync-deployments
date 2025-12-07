@@ -17,6 +17,31 @@ Rsync version: [3.4.1-r1](https://download.samba.org/pub/rsync/NEWS#3.4.1)
 
 ---
 
+## How it works
+
+```yml
+name: DEPLOY
+on:
+  push:
+    branches:
+    - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@v8
+      with:
+        switches: -avzr --delete
+        path: src/
+        remote_path: ${{ secrets.REMOTE_PATH }} # ex: /var/www/html/
+        remote_host: ${{ secrets.REMOTE_HOST }} # ex: example.com
+        remote_port: ${{ secrets.REMOTE_PORT }} # ex: 22
+        remote_user: ${{ secrets.REMOTE_USER }} # ex: ubuntu
+        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
+```
+
 ## Inputs
 
 - `debug`* - Whether to enable debug output. ("true" / "false") - Default: "false"
@@ -59,13 +84,15 @@ For simplicity, we are using `REMOTE_*` as the secret variables throughout the e
 
 | Version | Purpose          | Immutable  | 
 | ------- | ------------------ | ------------------ | 
-| ``v8``  |  latest release (pointer to 8.x.x) | no, points to latest MINOR,PATCH |
-| 8.0.2  | latest major release | yes |
+| ``v8`` (recommended)  |  latest MAJOR (pointer to 8.MINOR.PATCH) | no |
+| 8.0.2  | latest MINOR+PATCH | yes |
 | 7.1.0   | previous release | yes |
 
 Check [SECURITY.md](SECURITY.md) for support cycles.
 
 ## Example usage
+
+For better **security** always use secrets for remote_host, remote_port, remote_user and remote_path inputs.
 
 Simple:
 
@@ -86,13 +113,14 @@ jobs:
       with:
         switches: -avzr --delete
         path: src/
-        remote_path: /var/www/html/
-        remote_host: example.com
-        remote_user: debian
+        remote_path: ${{ secrets.REMOTE_PATH }} # ex: /var/www/html/
+        remote_host: ${{ secrets.REMOTE_HOST }} # ex: example.com
+        remote_port: ${{ secrets.REMOTE_PORT }} # ex: 22
+        remote_user: ${{ secrets.REMOTE_USER }} # ex: ubuntu
         remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
 ```
 
-Advanced:
+Advanced (with filters etc):
 
 ```yml
 jobs:
@@ -105,30 +133,10 @@ jobs:
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
-        remote_path: /var/www/html/
-        remote_host: example.com
-        remote_port: 5555
-        remote_user: debian
-        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
-```
-
-For better **security**, I suggest you create additional secrets for remote_host, remote_port, remote_user and remote_path inputs.
-
-```yml
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v6
-    - name: rsync deployments
-      uses: burnett01/rsync-deployments@v8
-      with:
-        switches: -avzr --delete
-        path: src/
-        remote_path: ${{ secrets.REMOTE_PATH }}
-        remote_host: ${{ secrets.REMOTE_HOST }}
-        remote_port: ${{ secrets.REMOTE_PORT }}
-        remote_user: ${{ secrets.REMOTE_USER }}
+        remote_path: ${{ secrets.REMOTE_PATH }} # ex: /var/www/html/
+        remote_host: ${{ secrets.REMOTE_HOST }} # ex: example.com
+        remote_port: ${{ secrets.REMOTE_PORT }} # ex: 22
+        remote_user: ${{ secrets.REMOTE_USER }} # ex: ubuntu
         remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
 ```
 
@@ -145,10 +153,10 @@ jobs:
       with:
         switches: -avzr --delete
         path: src/
-        remote_path: ${{ secrets.REMOTE_PATH }}
-        remote_host: ${{ secrets.REMOTE_HOST }}
-        remote_port: ${{ secrets.REMOTE_PORT }}
-        remote_user: ${{ secrets.REMOTE_USER }}
+        remote_path: ${{ secrets.REMOTE_PATH }} # ex: /var/www/html/
+        remote_host: ${{ secrets.REMOTE_HOST }} # ex: example.com
+        remote_port: ${{ secrets.REMOTE_PORT }} # ex: 22
+        remote_user: ${{ secrets.REMOTE_USER }} # ex: ubuntu
         remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
         remote_key_pass: ${{ secrets.REMOTE_PRIVATE_KEY_PASS }}
 ```
@@ -172,10 +180,10 @@ jobs:
         switches: -avzr --delete
         legacy_allow_rsa_hostkeys: "true"
         path: src/
-        remote_path: ${{ secrets.REMOTE_PATH }}
-        remote_host: ${{ secrets.REMOTE_HOST }}
-        remote_port: ${{ secrets.REMOTE_PORT }}
-        remote_user: ${{ secrets.REMOTE_USER }}
+        remote_path: ${{ secrets.REMOTE_PATH }} # ex: /var/www/html/
+        remote_host: ${{ secrets.REMOTE_HOST }} # ex: example.com
+        remote_port: ${{ secrets.REMOTE_PORT }} # ex: 22
+        remote_user: ${{ secrets.REMOTE_USER }} # ex: ubuntu
         remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
 ```
 
@@ -364,7 +372,7 @@ Please note that version 1.0 has reached end of life state.
 ## Acknowledgements
 
 + This project is a fork of [Contention/rsync-deployments](https://github.com/Contention/rsync-deployments)
-+ Base image [JoshPiper/rsync-docker](https://github.com/JoshPiper/rsync-docker)
++ docker-rsync [JoshPiper/rsync-docker](https://github.com/JoshPiper/rsync-docker)
 
 ---
 
