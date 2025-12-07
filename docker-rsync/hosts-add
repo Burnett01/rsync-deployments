@@ -2,4 +2,4 @@
 
 set -eu
 
-printf '%s\n' "$@" >> $HOME/.ssh/known_hosts
+echo "$@" >> $HOME/.ssh/known_hosts
