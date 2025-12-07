@@ -2,4 +2,6 @@
 
 set -eu
 
-mkdir -m 700 $HOME/.ssh
+if [ ! -d "$HOME/.ssh" ]; then
+    mkdir -m 700 $HOME/.ssh
+fi
