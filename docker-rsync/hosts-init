@@ -2,5 +2,8 @@
 
 set -eu
 
-touch $HOME/.ssh/known_hosts
+if [ ! -f "$HOME/.ssh/known_hosts" ]; then
+    touch $HOME/.ssh/known_hosts
+fi
+
 chmod 600 $HOME/.ssh/known_hosts
