@@ -15,6 +15,18 @@ The base-image of this action is very small and based on **Alpine 3.23.0** (no c
 Alpine version: [3.23.0](https://www.alpinelinux.org/posts/Alpine-3.23.0-released.html)
 Rsync version: [3.4.1-r1](https://download.samba.org/pub/rsync/NEWS#3.4.1)
 
+## Current Version: v8 (8.0.2)
+
+### Release channels:
+
+| Version | Purpose          | Immutable  | 
+| ------- | ------------------ | ------------------ | 
+| ``v8`` (recommended)  |  latest MAJOR (pointer to 8.MINOR.PATCH) | no |
+| 8.0.2  | latest MINOR+PATCH | yes |
+| 7.1.0   | previous release ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) | yes |
+
+Check [SECURITY.md](SECURITY.md) for support cycles.
+
 ---
 
 ## How it works
@@ -77,18 +89,6 @@ This action needs secret variables for the ssh private key of your key pair. The
 > Always use secrets when dealing with sensitive inputs!
 
 For simplicity, we are using `REMOTE_*` as the secret variables throughout the examples.
-
-## Current Version: v8 (8.0.2)
-
-### Release channels:
-
-| Version | Purpose          | Immutable  | 
-| ------- | ------------------ | ------------------ | 
-| ``v8`` (recommended)  |  latest MAJOR (pointer to 8.MINOR.PATCH) | no |
-| 8.0.2  | latest MINOR+PATCH | yes |
-| 7.1.0   | previous release | yes |
-
-Check [SECURITY.md](SECURITY.md) for support cycles.
 
 ## Example usage
 
