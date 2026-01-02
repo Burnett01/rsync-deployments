@@ -10,20 +10,20 @@ This cross-platform GitHub Action deploys files in [`path`](#inputs) (relative t
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`, such [actions/checkout](https://github.com/actions/checkout).
 
-The base-image of this action is very small and based on **Alpine 3.23.0** (no cache) which results in fast deployments.
+The base-image of this action is very small and based on **Alpine 3.23.2** (no cache) which results in fast deployments.
 
-Alpine version: [3.23.0](https://www.alpinelinux.org/posts/Alpine-3.23.0-released.html)
+Alpine version: [3.23.2](https://www.alpinelinux.org/posts/Alpine-3.23.2-released.html)
 Rsync version: [3.4.1-r1](https://download.samba.org/pub/rsync/NEWS#3.4.1)
 
-## Current Version: v8 (8.0.2)
+## Current Version: v8 (8.0.3)
 
 ### Release channels:
 
 | Version | Purpose          | Immutable  | 
 | ------- | ------------------ | ------------------ | 
 | ``v8`` (recommended)  |  latest MAJOR (pointer to 8.MINOR.PATCH) | no |
-| 8.0.2  | latest MINOR+PATCH | yes |
-| 7.1.0   | previous release ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) | yes |
+| 8.0.3  | latest MINOR+PATCH | yes |
+| 7.1.0   | previous MAJOR ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) | yes |
 
 Check [SECURITY.md](SECURITY.md) for support cycles.
 
