@@ -5,6 +5,8 @@ if [ -z "$(echo "$INPUT_REMOTE_PATH" | awk '{$1=$1};1')" ]; then
     exit 1
 fi
 
+echo "::warning title=DEPRECATION-WARNING::Version 7.1.0 and 7.0.2 are deprecated! Use v8! See deprecation notice https://github.com/Burnett01/rsync-deployments/discussions/96"
+
 # Start the SSH agent and load key.
 source agent-start "$GITHUB_ACTION"
 echo "$INPUT_REMOTE_KEY" | SSH_PASS="$INPUT_REMOTE_KEY_PASS" agent-add
