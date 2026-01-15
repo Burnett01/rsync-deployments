@@ -1,5 +1,5 @@
 name: 'Rsync Deployments Action'
-description: 'GitHub Action for deploying code via rsync over ssh'
+description: 'GitHub Action for deploying code via rsync over ssh securely - used by 5k+ workflows!'
 author: 'Burnett01'
 inputs:
   switches:
