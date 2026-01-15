@@ -23,7 +23,8 @@ Rsync version: [3.4.1-r1](https://download.samba.org/pub/rsync/NEWS#3.4.1)
 | ------- | ------------------ | ------------------ | 
 | ``v8`` (recommended)  |  latest MAJOR (pointer to 8.MINOR.PATCH) | no |
 | 8.0.3  | latest MINOR+PATCH | yes |
-| 7.1.0   | previous MAJOR ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) | yes |
+| 7.1.0   | previous MAJOR+MINOR ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) | yes |
+| 7.0.2   | previous MAJOR+PATCH ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) | no |
 
 Check [SECURITY.md](SECURITY.md) for support cycles.
 
