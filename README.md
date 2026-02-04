@@ -15,14 +15,14 @@ The base-image of this action is very small and based on **Alpine 3.23.3** (no c
 Alpine version: [3.23.3](https://www.alpinelinux.org/posts/Alpine-3.20.9-3.21.6-3.22.3-3.23.3-released.html)
 Rsync version: [3.4.1-r1](https://download.samba.org/pub/rsync/NEWS#3.4.1)
 
-## Current Version: v8 (8.0.3)
+## Current Version: v8 (8.0.4)
 
 ### Release channels:
 
 | Version | Purpose          | Immutable  | 
 | ------- | ------------------ | ------------------ | 
 | ``v8`` (recommended)  |  latest MAJOR (pointer to 8.MINOR.PATCH) | no |
-| 8.0.3  | latest MINOR+PATCH | yes |
+| 8.0.4  | latest MINOR+PATCH | yes |
 | 7.1.0   | previous MAJOR+MINOR ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) | yes |
 | 7.0.2   | previous MAJOR+PATCH ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) | no |
 
