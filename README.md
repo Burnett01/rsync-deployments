@@ -10,9 +10,9 @@ This cross-platform GitHub Action deploys files in [`path`](#inputs) (relative t
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`, such [actions/checkout](https://github.com/actions/checkout).
 
-The base-image of this action is very small and based on **Alpine 3.23.2** (no cache) which results in fast deployments.
+The base-image of this action is very small and based on **Alpine 3.23.3** (no cache) which results in fast deployments.
 
-Alpine version: [3.23.2](https://www.alpinelinux.org/posts/Alpine-3.23.2-released.html)
+Alpine version: [3.23.3](https://www.alpinelinux.org/posts/Alpine-3.20.9-3.21.6-3.22.3-3.23.3-released.html)
 Rsync version: [3.4.1-r1](https://download.samba.org/pub/rsync/NEWS#3.4.1)
 
 ## Current Version: v8 (8.0.3)
