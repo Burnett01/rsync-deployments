@@ -10,19 +10,19 @@ This cross-platform GitHub Action deploys files in [`path`](#inputs) (relative t
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`, such [actions/checkout](https://github.com/actions/checkout).
 
-The base-image of this action is very small and based on **Alpine 3.23.3** (no cache) which results in fast deployments.
+The base-image of this action is very small and based on **Alpine 3.23.4** (no cache) which results in fast deployments.
 
-Alpine version: [3.23.3](https://www.alpinelinux.org/posts/Alpine-3.20.9-3.21.6-3.22.3-3.23.3-released.html)
+Alpine version: [3.23.4](https://www.alpinelinux.org/posts/Alpine-3.20.10-3.21.7-3.22.4-3.23.4-released.html)
 Rsync version: [3.4.1-r1](https://download.samba.org/pub/rsync/NEWS#3.4.1)
 
-## Current Version: v8 (8.0.4)
+## Current Version: v8 (8.0.5)
 
 ### Release channels:
 
 | Version | Purpose          | Immutable  | 
 | ------- | ------------------ | ------------------ | 
 | ``v8`` (recommended)  |  latest MAJOR (pointer to 8.MINOR.PATCH) | no |
-| 8.0.4  | latest MINOR+PATCH | yes |
+| 8.0.5  | latest MINOR+PATCH | yes |
 | 7.1.0   | previous MAJOR+MINOR ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) | yes |
 | 7.0.2   | previous MAJOR+PATCH ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) | no |
 
@@ -285,6 +285,30 @@ sudo apk add rsync
 ---
 
 ## Versions
+
+## Version 8.0.4
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/8.0.4  (alpine 3.23.3)
+
+## Version 8.0.3
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/8.0.3  (alpine 3.23.2)
+
+## Version 8.0.2
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/8.0.2  (alpine 3.23.0)
+
+## Version 8.0.1 (EOL)
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/8.0.1  (alpine 3.23.0)
 
 ## Version 8.0.0 (EOL due to regression -> fixed via 8.0.1 & 8.0.2)
 
