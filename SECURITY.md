@@ -14,8 +14,8 @@ The following versions are currently being supported with security updates:
 | 8.0.2  | :white_check_mark: | >= 3.4.1-r1 | 3.23.0 | LTS (2026) |
 | 8.0.1  | :x: EOL | >= 3.4.1-r1 | 3.23.0 | † Apr, 1st 2026 |
 | 8.0.0  | :x: EOL (due to regression #90) | >= 3.4.1-r1 | 3.23.0 | † Dec, 6th 2025 |
-| 7.1.0  | :warning: DEPRECATED | >= 3.4.1-r0 | 3.22.1 | June, 1st 2026 ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) |
-| 7.0.2   | :warning: DEPRECATED | >= 3.4.0-r0 | 3.22.1 | June, 1st 2026 ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) |
+| 7.1.0  | :x: EOL | >= 3.4.1-r0 | 3.22.1 | † June, 1st 2026 ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) |
+| 7.0.2   | :x: EOL | >= 3.4.0-r0 | 3.22.1 | † June, 1st 2026 ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) |
 | 7.0.1   | :x: EOL | < 3.4.0 | 3.22.1 | † Dec, 6th 2025 |
 | 7.0.0   | :x: EOL | < 3.4.0| 3.19.1 | † Dec, 6th 2025 |
 | 6.x   | :x: EOL |< 3.4.0| 3.17.2 | † 2024 |
