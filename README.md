@@ -316,14 +316,14 @@ Check here:
 
 - https://github.com/Burnett01/rsync-deployments/tree/8.0.0  (alpine 3.23.0)
 
-## Version 7.1.0
+## Version 7.1.0 (EOL)
 
 Check here: 
 
 - https://github.com/Burnett01/rsync-deployments/tree/7.1.0  (alpine 3.22.1)
   
 
-## Version 7.0.2 (DEPRECATED)
+## Version 7.0.2 (EOL)
 
 Check here: 
 
