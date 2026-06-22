@@ -12,7 +12,7 @@ Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPA
 
 The base-image of this action is very small and based on **Alpine 3.24.1** (no cache) which results in fast deployments.
 
-Alpine version: [3.23.4](https://www.alpinelinux.org/posts/Alpine-3.24.1-released.html)
+Alpine version: [3.24.1](https://www.alpinelinux.org/posts/Alpine-3.24.1-released.html)
 Rsync version: [3.4.3-r1](https://download.samba.org/pub/rsync/NEWS#3.4.3)
 
 ## Current Version: v9 (9.0.0)
