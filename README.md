@@ -10,19 +10,21 @@ This cross-platform GitHub Action deploys files in [`path`](#inputs) (relative t
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`, such [actions/checkout](https://github.com/actions/checkout).
 
-The base-image of this action is very small and based on **Alpine 3.23.4** (no cache) which results in fast deployments.
+The base-image of this action is very small and based on **Alpine 3.24.1** (no cache) which results in fast deployments.
 
-Alpine version: [3.23.4](https://www.alpinelinux.org/posts/Alpine-3.20.10-3.21.7-3.22.4-3.23.4-released.html)
-Rsync version: [3.4.1-r1](https://download.samba.org/pub/rsync/NEWS#3.4.1)
+Alpine version: [3.23.4](https://www.alpinelinux.org/posts/Alpine-3.24.1-released.html)
+Rsync version: [3.4.3-r1](https://download.samba.org/pub/rsync/NEWS#3.4.3)
 
-## Current Version: v8 (8.0.5)
+## Current Version: v9 (9.0.0)
 
 ### Release channels:
 
 | Version | Purpose          | Immutable  | 
 | ------- | ------------------ | ------------------ | 
-| ``v8`` (recommended)  |  latest MAJOR (pointer to 8.MINOR.PATCH) | no |
-| 8.0.5  | latest MAJOR+MINOR+PATCH | yes |
+| ``v9`` (recommended, LTS)  |  latest MAJOR (pointer to 9.MINOR.PATCH) | no |
+| 9.0.0  | latest MAJOR+MINOR+PATCH | yes |
+| ``v8`` (ESU)  | previous MAJOR (pointer to 8.MINOR.PATCH) | no |
+| 8.0.5  | previous MAJOR+MINOR+PATCH | yes |
 
 Check [SECURITY.md](SECURITY.md) for support cycles.
 ---
@@ -39,9 +41,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@v8
+      uses: burnett01/rsync-deployments@v9
       with:
         switches: -avzr --delete
         path: src/
@@ -105,9 +107,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@v8
+      uses: burnett01/rsync-deployments@v9
       with:
         switches: -avzr --delete
         path: src/
@@ -125,9 +127,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@v8
+      uses: burnett01/rsync-deployments@v9
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
         path: src/
@@ -145,9 +147,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@v8
+      uses: burnett01/rsync-deployments@v9
       with:
         switches: -avzr --delete
         path: src/
@@ -171,9 +173,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@v8
+      uses: burnett01/rsync-deployments@v9
       with:
         switches: -avzr --delete
         legacy_allow_rsa_hostkeys: "true"
@@ -282,6 +284,12 @@ sudo apk add rsync
 ---
 
 ## Versions
+
+## Version 8.0.5
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/8.0.5  (alpine 3.23.4)
 
 ## Version 8.0.4
 
