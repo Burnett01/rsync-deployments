@@ -23,7 +23,7 @@ jobs:
     name: Test BATS Suite
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Install BATS
       run: |
@@ -38,7 +38,7 @@ jobs:
     name: Validate Action Definition
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Validate action.yml
       run: |
@@ -81,7 +81,7 @@ jobs:
     needs: [validate-action, action-structure]
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Build Docker image
       run: |
@@ -94,7 +94,7 @@ jobs:
     name: Validate Action Structure
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Check required files
       run: |
@@ -128,7 +128,7 @@ jobs:
     name: Lint Shell Scripts
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Install ShellCheck
       run: |
@@ -151,7 +151,7 @@ jobs:
     needs: [test, validate-action, docker-build, action-structure, lint-shell]
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Final integration check
       run: |
