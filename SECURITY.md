@@ -8,7 +8,8 @@ The following versions are currently being supported with security updates:
 
 | Version | Supported          | Rsync version          | Alpine version          | Support Until  |
 | ------- | ------------------ | ------------------ | ------------------ | ------------------ | 
-| (``v9``) 9.0.0  | :white_check_mark: | >= 3.4.3-r1 | 3.24.1 | LTS (2028-*) |
+| (``v9``) 9.0.1  | :white_check_mark: | >= 3.5.0-r0 | 3.24.1 | LTS (2028-*) |
+| 9.0.0  | :white_check_mark: | >= 3.4.3-r1 | 3.24.1 | LTS (2028-*) |
 | (``v8``) 8.0.5  | :white_check_mark: | >= 3.4.1-r1 | 3.23.4 | ESU (Apr, 1st 2027) |
 | 8.0.4  | :white_check_mark: | >= 3.4.1-r1 | 3.23.3 | Dec, 6th 2026 |
 | 8.0.3  | :white_check_mark: | >= 3.4.1-r1 | 3.23.2 | Dec, 6th 2026 |
