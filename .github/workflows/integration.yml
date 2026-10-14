@@ -1,0 +1,25 @@
+name: Integration
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integration-test:
+    if: github.actor == 'Burnett01'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Run integration test
+        uses: ./
+        with:
+          switches: -avzr --dry-run
+          remote_path: ${{ secrets.INTEGRATION_TEST_PATH }}
+          remote_host: ${{ secrets.INTEGRATION_TEST_SERVER }}
+          remote_port: ${{ secrets.INTEGRATION_TEST_PORT }}
+          remote_user: ${{ secrets.INTEGRATION_TEST_USER }}
+          remote_key: ${{ secrets.INTEGRATION_TEST_KEY }}
+          remote_key_pass: ${{ secrets.INTEGRATION_TEST_KEY_PASSPHRASE }}
