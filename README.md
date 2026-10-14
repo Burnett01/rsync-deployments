@@ -10,19 +10,19 @@ This cross-platform GitHub Action deploys files in [`path`](#inputs) (relative t
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`, such [actions/checkout](https://github.com/actions/checkout).
 
-The base-image of this action is very small and based on **Alpine 3.24.1** (no cache) which results in fast deployments.
+The base-image of this action is very small and based on **Alpine 3.24.2** (no cache) which results in fast deployments.
 
-Alpine version: [3.24.1](https://www.alpinelinux.org/posts/Alpine-3.24.1-released.html)
-Rsync version: [3.5.0-r0](https://download.samba.org/pub/rsync/NEWS#3.5.0)
+Alpine version: [3.24.2](https://alpinelinux.org/posts/Alpine-3.21.8-3.22.6-3.23.6-3.24.2-released.html)
+Rsync version: [3.5.1-r0](https://download.samba.org/pub/rsync/NEWS#3.5.1)
 
-## Current Version: v9 (9.0.1)
+## Current Version: v9 (9.0.2)
 
 ### Release channels:
 
 | Version | Purpose          | Immutable  | 
 | ------- | ------------------ | ------------------ | 
 | ``v9`` (recommended, LTS)  |  latest MAJOR (pointer to 9.MINOR.PATCH) | no |
-| 9.0.1  | latest MAJOR+MINOR+PATCH | yes |
+| 9.0.2  | latest MAJOR+MINOR+PATCH | yes |
 | ``v8`` (ESU)  | previous MAJOR (pointer to 8.MINOR.PATCH) | no |
 | 8.0.5  | previous MAJOR+MINOR+PATCH | yes |
 
@@ -285,6 +285,12 @@ sudo apk add rsync
 
 ## Versions
 
+## Version 9.0.1
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/9.0.1  (alpine 3.24.1)
+- 
 ## Version 9.0.0
 
 Check here: 
