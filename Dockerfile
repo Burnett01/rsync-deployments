@@ -7,7 +7,7 @@ RUN printf '%s\n' \
     >> /etc/apk/repositories
 
 # Install rsync from Alpine edge branch for latest upstream security patches.
-# Other packages are installed from Alpine 3.24.2 branch.
+# Other packages are installed from Alpine 3.24.3 branch.
 RUN apk update && apk add --no-cache --upgrade 'rsync@edge>=3.5.1-r0' openssh openssl busybox
 
 RUN rm -rf /var/cache/apk/*
