@@ -1,4 +1,4 @@
-FROM alpine:3.24.2@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6 AS base
+FROM alpine:3.24.3@sha256:be2656061b536c1883c4034790e21d0a09c5aaaf51968b89368a3c0371ea2c9a AS base
 
 # Add Alpine edge branch as tagged repository for rsync.
 RUN printf '%s\n' \
@@ -7,7 +7,7 @@ RUN printf '%s\n' \
     >> /etc/apk/repositories
 
 # Install rsync from Alpine edge branch for latest upstream security patches.
-# Other packages are installed from Alpine 3.24.2 branch.
+# Other packages are installed from Alpine 3.24.3 branch.
 RUN apk update && apk add --no-cache --upgrade 'rsync@edge>=3.5.1-r0' openssh openssl busybox
 
 RUN rm -rf /var/cache/apk/*
