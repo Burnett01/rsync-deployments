@@ -10,21 +10,23 @@ This cross-platform GitHub Action deploys files in [`path`](#inputs) (relative t
 
 Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`, such [actions/checkout](https://github.com/actions/checkout).
 
-The base-image of this action is very small and based on **Alpine 3.24.3** (no cache) which results in fast deployments.
+The base-image of this action is very small and based on **Alpine 3.24.4** (no cache) which results in fast deployments.
 
-Alpine version: [3.24.3](https://alpinelinux.org/posts/alpine-3.21.9-3.22.7-3.23.7-3.24.3-released/)
-Rsync version: [3.5.1-r0](https://download.samba.org/pub/rsync/NEWS#3.5.1)
+Alpine version: [3.24.4](https://alpinelinux.org/posts/alpine-3.21.10-3.22.8-3.23.8-3.24.4-released/)
+Rsync version: [3.5.2-r1](https://download.samba.org/pub/rsync/NEWS#3.5.2)
 
-## Current Version: v9 (9.0.3)
+## Current Version: v9 (9.0.4)
 
 ### Release channels:
 
 | Version | Purpose          | Immutable  | 
-| ------- | ------------------ | ------------------ | 
-| ``v9`` (recommended, LTS)  |  latest MAJOR (pointer to 9.MINOR.PATCH) | no |
-| 9.0.3  | latest MAJOR+MINOR+PATCH | yes |
-| ``v8`` (ESU)  | previous MAJOR (pointer to 8.MINOR.PATCH) | no |
-| 8.0.5  | previous MAJOR+MINOR+PATCH | yes |
+| ------- | ------------------ | ------------------ |
+| ``@v9`` (recommended, LTS)  |  latest MAJOR (pointer to 9.MINOR.PATCH) | no |
+| ``@9.0.4``  | latest MAJOR+MINOR+PATCH | yes |
+| ``@v8`` (ESU)  | previous MAJOR (pointer to 8.MINOR.PATCH) | no |
+| ``@8.0.5``  | previous MAJOR+MINOR+PATCH | yes |
+
+You can also use ``@latest`` which always points to the latest MAJOR (currently ``v9``).
 
 Check [SECURITY.md](SECURITY.md) for support cycles.
 ---
@@ -284,6 +286,12 @@ sudo apk add rsync
 ---
 
 ## Versions
+
+## Version 9.0.3
+
+Check here: 
+
+- https://github.com/Burnett01/rsync-deployments/tree/9.0.3  (alpine 3.24.3)
 
 ## Version 9.0.2
 
