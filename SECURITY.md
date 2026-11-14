@@ -2,6 +2,8 @@
 
 The Docker image and code quality are regularly checked for vulnerabilities and CVEs by Snyk and CodeQL.
 
+Additionally, we run linter and BATS suite tests to ensure stable compatibility.
+
 ## Supported Versions
 
 The following versions are currently being supported with security updates:
@@ -13,14 +15,14 @@ The following versions are currently being supported with security updates:
 | 9.0.2  | :white_check_mark: | >= 3.5.1-r0 | 3.24.2 | LTS (Jan, 8th 2028) |
 | 9.0.1  | :white_check_mark: | >= 3.5.0-r0 | 3.24.1 | LTS (Jan, 8th 2028) |
 | 9.0.0  | :white_check_mark: | >= 3.4.3-r1 | 3.24.1 | LTS (Jan, 8th 2028) |
-| (``v8``) 8.0.5  | ⚠️ ESU | >= 3.4.1-r1 | 3.23.4 | Apr, 1st 2027 |
-| 8.0.4  | :warning: DEPRECATED | >= 3.4.1-r1 | 3.23.3 | Dec, 6th 2026 |
-| 8.0.3  | :warning: DEPRECATED | >= 3.4.1-r1 | 3.23.2 | Dec, 6th 2026 |
-| 8.0.2  | :warning: DEPRECATED | >= 3.4.1-r1 | 3.23.0 | Dec, 6th 2026 |
+| (``v8``) 8.0.5  | ⚠️ ESU | >= 3.4.1-r1 | 3.23.4 | Apr, 1st 2027 ([esu notice](https://github.com/Burnett01/rsync-deployments/discussions/120)) |
+| 8.0.4  | :warning: DEPRECATED | >= 3.4.1-r1 | 3.23.3 | Dec, 6th 2026 ([eol notice](https://github.com/Burnett01/rsync-deployments/discussions/120)) |
+| 8.0.3  | :warning: DEPRECATED | >= 3.4.1-r1 | 3.23.2 | Dec, 6th 2026 ([eol notice](https://github.com/Burnett01/rsync-deployments/discussions/120)) |
+| 8.0.2  | :warning: DEPRECATED | >= 3.4.1-r1 | 3.23.0 | Dec, 6th 2026 ([eol notice](https://github.com/Burnett01/rsync-deployments/discussions/120)) |
 | 8.0.1  | :x: EOL | >= 3.4.1-r1 | 3.23.0 | † Apr, 1st 2026 |
 | 8.0.0  | :x: EOL (due to regression #90) | >= 3.4.1-r1 | 3.23.0 | † Dec, 6th 2025 |
-| 7.1.0  | :x: EOL | >= 3.4.1-r0 | 3.22.1 | † June, 1st 2026 ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) |
-| 7.0.2   | :x: EOL | >= 3.4.0-r0 | 3.22.1 | † June, 1st 2026 ([deprecation notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) |
+| 7.1.0  | :x: EOL | >= 3.4.1-r0 | 3.22.1 | † June, 1st 2026 ([eol notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) |
+| 7.0.2   | :x: EOL | >= 3.4.0-r0 | 3.22.1 | † June, 1st 2026 ([eol notice](https://github.com/Burnett01/rsync-deployments/discussions/96)) |
 | 7.0.1   | :x: EOL | < 3.4.0 | 3.22.1 | † Dec, 6th 2025 |
 | 7.0.0   | :x: EOL | < 3.4.0| 3.19.1 | † Dec, 6th 2025 |
 | 6.x   | :x: EOL |< 3.4.0| 3.17.2 | † 2024 |
@@ -35,6 +37,37 @@ The following versions are currently being supported with security updates:
 EOL = End of life (no support/no updates)
 
 DEPRECATED = Close to EOL (support/no updates)
+
+ESU = Close to DEPRECATED (support/updates)
+
+## Release cycles
+
+Our aim is to follow the [Alpine Linux release cycles](https://alpinelinux.org/releases/).
+
+Whenever a new Alpine version is released, we will release a new action version.
+
+You can indicate the Alpine minor-version in our major-version number:
+
+| Alpine Version | Action Version |
+| ------- | ------------------ |
+| 3.**24**.4  | **9**.0.4 |
+| 3.**24**.3  | **9**.0.3 |
+
+You can indicate the Alpine patch-version in our patch-version number:
+
+| Alpine Version | Action Version |
+| ------- | ------------------ |
+| 3.24.**4**  | 9.0.**4** |
+| 3.24.**3**  | 9.0.**3** |
+
+If we release an OOB patch for a specific package update, our minor-version number increases:
+
+| Alpine Version | Action Version |
+| ------- | ------------------ |
+| 3.24.4  | 9.**1**.4 |
+| 3.24.3  | 9.**2**.3 |
+
+**Note:** This is subject to change because we want to align our versioning with Alpines versioning.
 
 ## Reporting a Vulnerability
 
