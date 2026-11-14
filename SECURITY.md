@@ -9,7 +9,7 @@ The following versions are currently being supported with security updates:
 | Version | Supported          | Rsync version          | Alpine version          | Support Until  |
 | ------- | ------------------ | ------------------ | ------------------ | ------------------ | 
 | (``v9``) 9.0.4  | :white_check_mark: | >= 3.5.2-r1 | 3.24.4 | LTS (2028-*) |
-| 9.0.3  | :white_check_mark: | >= 3.5.1-r0 | 3.24.3 | LTS (2028-*) |
+| 9.0.3  | :white_check_mark: | >= 3.5.1-r0 | 3.24.3 | LTS (Jan, 8th 2028) |
 | 9.0.2  | :white_check_mark: | >= 3.5.1-r0 | 3.24.2 | LTS (Jan, 8th 2028) |
 | 9.0.1  | :white_check_mark: | >= 3.5.0-r0 | 3.24.1 | LTS (Jan, 8th 2028) |
 | 9.0.0  | :white_check_mark: | >= 3.4.3-r1 | 3.24.1 | LTS (Jan, 8th 2028) |
