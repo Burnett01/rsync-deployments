@@ -11,6 +11,8 @@ if [ -z "$(echo "$INPUT_REMOTE_PATH" | awk '{$1=$1};1')" ]; then
     exit 1
 fi
 
+echo "::error title=EOL::Version 8.0.0 has reached end of life! Use v9! See eol notice https://github.com/Burnett01/rsync-deployments/security/policy"
+
 # Initialize SSH and known hosts.
 source ssh-init
 source hosts-init
