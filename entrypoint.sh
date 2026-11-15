@@ -29,7 +29,11 @@ if [ "${INPUT_LEGACY_ALLOW_RSA_HOSTKEYS:-false}" = "true" ]; then
 fi
 
 STRICT_HOSTKEYS_CHECKING="-o StrictHostKeyChecking=no"
-if [ "${INPUT_STRICT_HOSTKEYS_CHECKING:-false}" = "true" ]; then
+# If no 'known_hosts' input is provided and 'strict_hostkeys_checking: true',
+# then use exisiting keyscan functionality. DEPRECATED: Will be no-op in next major.
+if [[ -z "${INPUT_KNOWN_HOSTS:-}" && "${INPUT_STRICT_HOSTKEYS_CHECKING:-false}" = "true" ]]; then
+    echo "::warning title=DEPRECATION::Input 'strict_hostkeys_checking' will be a no-op in the next major version! Use 'known_hosts'."
+
     STRICT_HOSTKEYS_CHECKING="-o UserKnownHostsFile=$HOME/.ssh/known_hosts -o StrictHostKeyChecking=yes"
 
     key="$(ssh-keyscan -p "$INPUT_REMOTE_PORT" "$INPUT_REMOTE_HOST" 2>/dev/null | sed '/^#/d')" || key=""
@@ -39,7 +43,30 @@ if [ "${INPUT_STRICT_HOSTKEYS_CHECKING:-false}" = "true" ]; then
         # add to known hosts
         echo "$key" | while IFS= read -r line; do hosts-add "$line"; done
     else
-        echo "Warning: failed to fetch host key for $INPUT_REMOTE_HOST" >&2
+        echo "Warning: failed to fetch host key for remote host" >&2
+        exit 1
+    fi
+# If 'known_hosts' is provided, strict hostkeys checking is auto enforced:
+elif [ -n "${INPUT_KNOWN_HOSTS:-}" ]; then
+    STRICT_HOSTKEYS_CHECKING="-o UserKnownHostsFile=$HOME/.ssh/known_hosts -o StrictHostKeyChecking=yes"
+
+    if [ "$INPUT_REMOTE_PORT" = "22" ]; then
+        host_pattern="$INPUT_REMOTE_HOST"
+    else
+        host_pattern="[$INPUT_REMOTE_HOST]:$INPUT_REMOTE_PORT"
+    fi
+
+    printf '%s\n' "$INPUT_KNOWN_HOSTS" | tr -d '\r' | while IFS= read -r line; do
+        line="$(echo "$line" | awk '{$1=$1};1')"
+        case "$line" in
+            ''|'#'*) continue ;;
+            ssh-*|ecdsa-*|sk-*) hosts-add "$host_pattern $line" ;;
+            *) hosts-add "$line" ;;
+        esac
+    done
+
+    if ! ssh-keygen -lf "$HOME/.ssh/known_hosts" >/dev/null 2>&1; then
+        echo "Error: Input 'known_hosts' contains no valid host key" >&2
         exit 1
     fi
 fi
