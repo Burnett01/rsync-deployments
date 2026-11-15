@@ -45,6 +45,10 @@ inputs:
     description: 'Debug the action'
     required: false
     default: 'false'
+  log_level:
+    description: 'The log-level that is used in the rsh-switch'
+    required: false
+    default: 'ERROR'
 runs:
   using: 'docker'
   image: 'Dockerfile'
