@@ -62,9 +62,11 @@ jobs:
 
 - `switches`* - The first is for any initial/required rsync flags, eg: `-avzr --delete`
 
-- `rsh` - Remote shell commands
+- `rsh` - Custom remote shell SSH parameters via Rsync.
 
-- `strict_hostkeys_checking` - Enables support for strict hostkeys (fingerprint) checking. ("true" / "false") - Default: "false"
+- `strict_hostkeys_checking` - Enables support for strict hostkeys (fingerprint) checking. ("true" / "false") - Default: "false" - **DEPRECATED (use 'known_hosts')!**
+
+- `known_hosts` - Trusted host keys of the remote server, one per line (pinning). Enables strict hostkeys checking. Takes precedence over `strict_hostkeys_checking` - Default: "" - [See guide](#pinning-trusted-host-keys-known_hosts)
 
 - `legacy_allow_rsa_hostkeys` - Enables support for legacy RSA host keys on OpenSSH 8.8+. ("true" / "false") - Default: "false"
 
@@ -122,7 +124,7 @@ jobs:
         remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
 ```
 
-Advanced (with filters etc):
+Advanced (with filters etc) use ``switches``:
 
 ```yml
 jobs:
@@ -134,12 +136,7 @@ jobs:
       uses: burnett01/rsync-deployments@v9
       with:
         switches: -avzr --delete --exclude="" --include="" --filter=""
-        path: src/
-        remote_path: ${{ secrets.REMOTE_PATH }} # ex: /var/www/html/
-        remote_host: ${{ secrets.REMOTE_HOST }} # ex: example.com
-        remote_port: ${{ secrets.REMOTE_PORT }} # ex: 22
-        remote_user: ${{ secrets.REMOTE_USER }} # ex: ubuntu
-        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
+        [...redacted...]
 ```
 
 If your private key is passphrase protected you should use:
@@ -153,19 +150,54 @@ jobs:
     - name: rsync deployments
       uses: burnett01/rsync-deployments@v9
       with:
-        switches: -avzr --delete
-        path: src/
-        remote_path: ${{ secrets.REMOTE_PATH }} # ex: /var/www/html/
-        remote_host: ${{ secrets.REMOTE_HOST }} # ex: example.com
-        remote_port: ${{ secrets.REMOTE_PORT }} # ex: 22
-        remote_user: ${{ secrets.REMOTE_USER }} # ex: ubuntu
+        [...redacted...]
         remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
         remote_key_pass: ${{ secrets.REMOTE_PRIVATE_KEY_PASS }}
 ```
 
 ---
 
-#### Legacy RSA Hostkeys support for OpenSSH Servers >= 8.8+
+## Pinning trusted host keys (known_hosts)
+
+By default the action accepts any host key the server presents. With ``strict_hostkeys_checking: "true"`` (deprecated)
+the key is fetched via `ssh-keyscan` right before the deployment, which only protects against
+the key changing during the run, not against a server that is already spoofed at that moment.
+
+To actually verify the server, pass its host key(s) via ``known_hosts``. The action then enables strict checking and skips `ssh-keyscan`. If the server presents
+a different key, the deployment fails.
+
+Get the public host key on the server itself (not over the network):
+
+```sh
+cat /etc/ssh/ssh_host_ed25519_key.pub
+# ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... user@server
+```
+
+Store the output in a secret (e.g. `REMOTE_HOST_KEYS`) and pass it to the action:
+
+```yml
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@v9
+      with:
+        [...redacted...]
+        known_hosts: ${{ secrets.REMOTE_HOST_KEYS }}
+```
+
+Accepted formats, one entry per line (blank lines and lines starting with `#` are ignored):
+
+- Bare key, e.g. `ssh-ed25519 AAAAC3...`. It is bound to `remote_host` (and `remote_port`, if not 22) automatically.
+- Full known_hosts line, e.g. `example.com ssh-ed25519 AAAAC3...` or a hashed `|1|...` line. Used as is, so the host part must match `remote_host`.
+
+Multiple keys (e.g. ed25519 and ecdsa) can be listed on separate lines.
+
+---
+
+## Legacy RSA Hostkeys support for OpenSSH Servers >= 8.8+
 
 If your remote OpenSSH Server still uses RSA hostkeys, then you have to
 manually enable legacy support for this by using ``legacy_allow_rsa_hostkeys: "true"``.
@@ -179,21 +211,15 @@ jobs:
     - name: rsync deployments
       uses: burnett01/rsync-deployments@v9
       with:
-        switches: -avzr --delete
+        [...redacted...]
         legacy_allow_rsa_hostkeys: "true"
-        path: src/
-        remote_path: ${{ secrets.REMOTE_PATH }} # ex: /var/www/html/
-        remote_host: ${{ secrets.REMOTE_HOST }} # ex: example.com
-        remote_port: ${{ secrets.REMOTE_PORT }} # ex: 22
-        remote_user: ${{ secrets.REMOTE_USER }} # ex: ubuntu
-        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
 ```
 
 See [#49](https://github.com/Burnett01/rsync-deployments/issues/49) and [#24](https://github.com/Burnett01/rsync-deployments/issues/24) for more information.
 
 **Note:** Only use this if necessary. It's recommended to upgrade your remote OpenSSH server instead.
 
---
+---
 
 ## Advanced Rsync switches/flags/options
 
